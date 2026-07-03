@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+<title>Finance Pro</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div id="app">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="logo-block">
+
+            <div class="logo-circle">
+                💰
+            </div>
+
+            <div>
+                <h1>Finance Pro</h1>
+                <span>Personal Finance System</span>
+            </div>
+
+        </div>
+
+        <nav class="sidebar-menu">
+
+            <button class="menu-item active" data-page="dashboard">
+                <span>📊</span>
+                <span>Главная</span>
+            </button>
+
+            <button class="menu-item" data-page="transactions">
+                <span>💸</span>
+                <span>Доходы и расходы</span>
+            </button>
+
+            <button class="menu-item" data-page="jobs">
+                <span>💼</span>
+                <span>Подработки</span>
+            </button>
+
+            <button class="menu-item" data-page="investments">
+                <span>🖥️</span>
+                <span>Инвестиции</span>
+            </button>
+
+            <button class="menu-item" data-page="savings">
+                <span>🏦</span>
+                <span>Накопления</span>
+            </button>
+
+            <button class="menu-item" data-page="analytics">
+                <span>📈</span>
+                <span>Аналитика</span>
+            </button>
+
+            <button class="menu-item" data-page="calendar">
+                <span>📅</span>
+                <span>Календарь</span>
+            </button>
+
+            <button class="menu-item" data-page="reports">
+                <span>📄</span>
+                <span>Отчеты</span>
+            </button>
+
+            <button class="menu-item" data-page="settings">
+                <span>⚙️</span>
+                <span>Настройки</span>
+            </button>
+
+        </nav>
+
+    </aside>
+
+    <!-- MAIN -->
+
+    <main class="main-content">
+
+        <!-- HEADER -->
+
+        <header class="topbar">
+
+            <div class="topbar-left">
+
+                <h2>
+                    Финансовая Панель
+                </h2>
+
+                <p>
+                    Полный контроль над деньгами
+                </p>
+
+            </div>
+
+            <div class="topbar-right">
+
+                <button id="backupBtn" class="header-btn">
+                    Экспорт
+                </button>
+
+                <button id="restoreBtn" class="header-btn">
+                    Импорт
+                </button>
+
+            </div>
+
+        </header>
+
+        <!-- DASHBOARD -->
+
+        <section
+        id="dashboardPage"
+        class="page active-page">
+
+            <!-- QUICK STATS -->
+
+            <div class="cards-grid">
+
+                <div class="stat-card balance">
+
+                    <div class="card-label">
+                        Общий баланс
+                    </div>
+
+                    <div class="card-value"
+                    id="totalBalance">
+                        0 ₽
+                    </div>
+
+                    <div class="card-change positive">
+                        +0%
+                    </div>
+
+                </div>
+
+                <div class="stat-card income">
+
+                    <div class="card-label">
+                        Доходы
+                    </div>
+
+                    <div class="card-value"
+                    id="totalIncome">
+                        0 ₽
+                    </div>
+
+                    <div class="card-change positive">
+                        +0%
+                    </div>
+
+                </div>
+
+                <div class="stat-card expense">
+
+                    <div class="card-label">
+                        Расходы
+                    </div>
+
+                    <div class="card-value"
+                    id="totalExpenses">
+                        0 ₽
+                    </div>
+
+                    <div class="card-change negative">
+                        0%
+                    </div>
+
+                </div>
+
+                <div class="stat-card savings">
+
+                    <div class="card-label">
+                        Накопления
+                    </div>
+
+                    <div class="card-value"
+                    id="totalSavings">
+                        0 ₽
+                    </div>
+
+                    <div class="card-change">
+                        Цели
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- FINANCIAL HEALTH -->
+
+            <div class="health-section">
+
+                <div class="health-card">
+
+                    <div class="health-header">
+
+                        <h3>
+                            Финансовое здоровье
+                        </h3>
+
+                        <span id="healthScore">
+                            0 / 100
+                        </span>
+
+                    </div>
+
+                    <div class="health-progress">
+
+                        <div
+                        id="healthBar"
+                        class="health-fill">
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- SURVIVAL CARD -->
+
+            <div class="survival-card">
+
+                <div class="survival-info">
+
+                    <h3>
+                        Финансовая подушка
+                    </h3>
+
+                    <p>
+                        Если перестать работать сегодня:
+                    </p>
+
+                </div>
+
+                <div
+                id="survivalDays"
+                class="survival-days">
+
+                    0 дней
+
+                </div>
+
+            </div>
+
+            <!-- CHARTS -->
+
+            <div class="dashboard-charts">
+
+                <div class="chart-card">
+
+                    <div class="chart-title">
+                        Денежный поток
+                    </div>
+
+                    <canvas
+                    id="cashFlowChart">
+                    </canvas>
+
+                </div>
+
+                <div class="chart-card">
+
+                    <div class="chart-title">
+                        Доходы / Расходы
+                    </div>
+
+                    <canvas
+                    id="incomeExpenseChart">
+                    </canvas>
+
+                </div>
+
+            </div>
+
+            <!-- SECOND ROW -->
+
+            <div class="dashboard-charts">
+
+                <div class="chart-card">
+
+                    <div class="chart-title">
+                        Категории расходов
+                    </div>
+
+                    <canvas
+                    id="expenseCategoryChart">
+                    </canvas>
+
+                </div>
+
+                <div class="chart-card">
+
+                    <div class="chart-title">
+                        Категории доходов
+                    </div>
+
+                    <canvas
+                    id="incomeCategoryChart">
+                    </canvas>
+
+                </div>
+
+            </div>
+
+            <!-- QUICK ANALYTICS -->
+
+            <div class="analytics-preview">
+
+                <div class="preview-card">
+
+                    <h4>
+                        Средний доход
+                    </h4>
+
+                    <span
+                    id="avgIncome">
+                    0 ₽
+                    </span>
+
+                </div>
+
+                <div class="preview-card">
+
+                    <h4>
+                        Средний расход
+                    </h4>
+
+                    <span
+                    id="avgExpense">
+                    0 ₽
+                    </span>
+
+                </div>
+
+                <div class="preview-card">
+
+                    <h4>
+                        Средний чек
+                    </h4>
+
+                    <span
+                    id="avgTransaction">
+                    0 ₽
+                    </span>
+
+                </div>
+
+                <div class="preview-card">
+
+                    <h4>
+                        Лучший месяц
+                    </h4>
+
+                    <span
+                    id="bestMonth">
+                    —
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- TRANSACTIONS -->
+
+        <section
+        id="transactionsPage"
+        class="page">
+
+        </section>
+
+        <!-- JOBS -->
+
+        <section
+        id="jobsPage"
+        class="page">
+
+        </section>
+
+        <!-- INVESTMENTS -->
+
+        <section
+        id="investmentsPage"
+        class="page">
+
+        </section>
+
+        <!-- SAVINGS -->
+
+        <section
+        id="savingsPage"
+        class="page">
+
+        </section>
+
+        <!-- ANALYTICS -->
+
+        <section
+        id="analyticsPage"
+        class="page">
+
+        </section>
+
+        <!-- CALENDAR -->
+
+        <section
+        id="calendarPage"
+        class="page">
+
+        </section>
+
+        <!-- REPORTS -->
+
+        <section
+        id="reportsPage"
+        class="page">
+
+        </section>
+
+        <!-- SETTINGS -->
+
+        <section
+        id="settingsPage"
+        class="page">
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="js/storage.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>
