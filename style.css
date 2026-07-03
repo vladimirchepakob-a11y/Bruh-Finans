@@ -425,3 +425,592 @@ ANIMATION
     }
 
 }
+/*=========================================
+TOPBAR
+=========================================*/
+
+.topbar{
+
+    height:86px;
+
+    padding:0 35px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    background:rgba(255,255,255,.78);
+
+    backdrop-filter:blur(22px);
+
+    border-bottom:1px solid var(--border);
+
+    position:sticky;
+
+    top:0;
+
+    z-index:20;
+
+}
+
+.topbar__title{
+
+    font-size:30px;
+
+    font-weight:800;
+
+    letter-spacing:-.5px;
+
+    color:var(--text);
+
+}
+
+.topbar__actions{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+}
+
+.topbar__menu-btn{
+
+    width:48px;
+
+    height:48px;
+
+    border:none;
+
+    border-radius:16px;
+
+    background:#fff;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    box-shadow:var(--shadow);
+
+}
+
+.topbar__menu-btn:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:var(--shadow-hover);
+
+}
+
+.topbar__btn{
+
+    height:48px;
+
+    border:none;
+
+    cursor:pointer;
+
+    border-radius:16px;
+
+    transition:.25s;
+
+    font-weight:700;
+
+}
+
+.topbar__btn--icon{
+
+    width:48px;
+
+    background:#fff;
+
+    box-shadow:var(--shadow);
+
+}
+
+.topbar__btn--icon:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:var(--shadow-hover);
+
+}
+
+.topbar__btn--primary{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:0 22px;
+
+    color:#fff;
+
+    background:linear-gradient(135deg,#3b82f6,#2563eb);
+
+    box-shadow:
+
+    0 12px 35px rgba(59,130,246,.30);
+
+}
+
+.topbar__btn--primary:hover{
+
+    transform:translateY(-3px);
+
+}
+
+.badge{
+
+    position:absolute;
+
+    width:18px;
+
+    height:18px;
+
+    border-radius:50%;
+
+    background:#ef4444;
+
+    color:#fff;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:11px;
+
+    font-weight:700;
+
+}
+
+/*=========================================
+GRID
+=========================================*/
+
+.cards-grid{
+
+    display:grid;
+
+    gap:24px;
+
+}
+
+.cards-grid--main{
+
+    grid-template-columns:
+
+    repeat(auto-fit,minmax(270px,1fr));
+
+    margin-bottom:28px;
+
+}
+
+.cards-grid--stats{
+
+    grid-template-columns:
+
+    repeat(auto-fit,minmax(230px,1fr));
+
+    margin-bottom:28px;
+
+}
+
+.cards-grid--analytics{
+
+    grid-template-columns:
+
+    repeat(auto-fit,minmax(380px,1fr));
+
+}
+
+/*=========================================
+ROWS
+=========================================*/
+
+.dashboard-row{
+
+    display:grid;
+
+    gap:24px;
+
+    grid-template-columns:
+
+    2fr 1fr;
+
+    margin-bottom:28px;
+
+}
+
+/*=========================================
+CARDS
+=========================================*/
+
+.card{
+
+    background:rgba(255,255,255,.84);
+
+    backdrop-filter:blur(18px);
+
+    border-radius:28px;
+
+    padding:26px;
+
+    border:1px solid rgba(255,255,255,.6);
+
+    box-shadow:var(--shadow);
+
+    transition:.35s;
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.card::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+
+    height:5px;
+
+    background:linear-gradient(90deg,#3b82f6,#7c3aed);
+
+    opacity:0;
+
+    transition:.3s;
+
+}
+
+.card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:var(--shadow-hover);
+
+}
+
+.card:hover::before{
+
+    opacity:1;
+
+}
+
+/*=========================================
+CARD HEADER
+=========================================*/
+
+.card__header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:20px;
+
+}
+
+.card__label{
+
+    font-size:14px;
+
+    color:var(--text-light);
+
+    font-weight:700;
+
+    text-transform:uppercase;
+
+    letter-spacing:1px;
+
+}
+
+.card__hint{
+
+    font-size:13px;
+
+    color:#94a3b8;
+
+}
+
+/*=========================================
+VALUES
+=========================================*/
+
+.card__value{
+
+    font-size:36px;
+
+    font-weight:800;
+
+    letter-spacing:-1px;
+
+    margin-bottom:12px;
+
+    color:var(--text);
+
+}
+
+.card__value--small{
+
+    font-size:24px;
+
+}
+
+.card__delta{
+
+    font-size:15px;
+
+    color:var(--green);
+
+    font-weight:700;
+
+}
+
+.card__note{
+
+    color:var(--text-light);
+
+    line-height:1.6;
+
+    font-size:14px;
+
+}
+
+/*=========================================
+SPECIAL CARDS
+=========================================*/
+
+.card--balance{
+
+    background:
+
+    linear-gradient(145deg,#3b82f6,#2563eb);
+
+    color:#fff;
+
+}
+
+.card--balance .card__label,
+
+.card--balance .card__hint,
+
+.card--balance .card__value{
+
+    color:#fff;
+
+}
+
+.card--income{
+
+    border-left:6px solid #10b981;
+
+}
+
+.card--expense{
+
+    border-left:6px solid #ef4444;
+
+}
+
+.card--investments{
+
+    border-left:6px solid #8b5cf6;
+
+}
+
+.card--savings{
+
+    border-left:6px solid #f59e0b;
+
+}
+
+.card--health{
+
+    border-left:6px solid #06b6d4;
+
+}
+
+/*=========================================
+WIDE
+=========================================*/
+
+.card--wide{
+
+    width:100%;
+
+}
+
+/*=========================================
+LINK
+=========================================*/
+
+.card__link{
+
+    text-decoration:none;
+
+    font-weight:700;
+
+    color:var(--primary);
+
+    transition:.25s;
+
+}
+
+.card__link:hover{
+
+    opacity:.75;
+
+}
+
+/*=========================================
+CHART PLACEHOLDER
+=========================================*/
+
+.chart-container{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    min-height:260px;
+
+    border-radius:20px;
+
+    background:#f7faff;
+
+    border:2px dashed #d6e2f2;
+
+}
+
+.chart-placeholder{
+
+    color:#94a3b8;
+
+    font-size:15px;
+
+}
+
+/*=========================================
+HEALTH RING
+=========================================*/
+
+.ring-chart{
+
+    width:170px;
+
+    height:170px;
+
+    border-radius:50%;
+
+    margin:auto;
+
+    background:
+
+    conic-gradient(
+
+        #3b82f6 0deg,
+
+        #7c3aed 180deg,
+
+        #edf2f8 180deg
+
+    );
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    position:relative;
+
+}
+
+.ring-chart::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:130px;
+
+    height:130px;
+
+    background:#fff;
+
+    border-radius:50%;
+
+}
+
+.ring-chart__value,
+
+.ring-chart__max{
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+.ring-chart__value{
+
+    font-size:34px;
+
+    font-weight:800;
+
+}
+
+.ring-chart__max{
+
+    color:#94a3b8;
+
+    margin-left:4px;
+
+}
+
+.ring-chart--small{
+
+    width:130px;
+
+    height:130px;
+
+}
+
+.ring-chart--small::after{
+
+    width:96px;
+
+    height:96px;
+
+}
+
+/*=========================================
+HOVER ANIMATION
+=========================================*/
+
+.card:hover .card__value{
+
+    transform:scale(1.03);
+
+    transition:.25s;
+
+}
