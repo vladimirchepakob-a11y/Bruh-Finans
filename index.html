@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Финансовый ассистент</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css">
+
+</head>
+
+<body>
+
+    <!-- ====================================================== -->
+    <!-- ЗАГРУЗКА -->
+    <!-- ====================================================== -->
+
+    <div id="loader"></div>
+
+
+    <!-- ====================================================== -->
+    <!-- ОСНОВНОЕ ПРИЛОЖЕНИЕ -->
+    <!-- ====================================================== -->
+
+    <div id="app">
+
+        <!-- ============================================== -->
+        <!-- БОКОВОЕ МЕНЮ -->
+        <!-- ============================================== -->
+
+        <aside id="sidebar">
+
+            <div class="logo">
+
+                Финансовый Ассистент
+
+            </div>
+
+            <nav>
+
+                <button data-page="dashboard">
+                    Главная
+                </button>
+
+                <button data-page="transactions">
+                    Доходы и расходы
+                </button>
+
+                <button data-page="sidejobs">
+                    Подработки
+                </button>
+
+                <button data-page="investments">
+                    Инвестиции
+                </button>
+
+                <button data-page="savings">
+                    Накопления
+                </button>
+
+                <button data-page="analytics">
+                    Аналитика
+                </button>
+
+                <button data-page="calendar">
+                    Календарь
+                </button>
+
+                <button data-page="reports">
+                    Отчёты
+                </button>
+
+                <button data-page="settings">
+                    Настройки
+                </button>
+
+            </nav>
+
+        </aside>
+
+
+        <!-- ============================================== -->
+        <!-- ОСНОВНОЙ КОНТЕНТ -->
+        <!-- ============================================== -->
+
+        <main id="content">
+
+            <!-- Верхняя панель -->
+
+            <header id="topbar">
+
+                <h1 id="pageTitle">
+                    Главная
+                </h1>
+
+                <div id="topActions">
+
+                    <button id="searchButton">
+
+                        Поиск
+
+                    </button>
+
+                    <button id="notificationButton">
+
+                        Уведомления
+
+                    </button>
+
+                    <button id="profileButton">
+
+                        Профиль
+
+                    </button>
+
+                </div>
+
+            </header>
+
+            <!-- ================================================= -->
+            <!-- ГЛАВНАЯ -->
+            <!-- ================================================= -->
+
+            <section
+                class="page"
+                id="dashboard">
+
+                <div class="grid">
+
+                    <div id="balanceCard"></div>
+
+                    <div id="incomeCard"></div>
+
+                    <div id="expenseCard"></div>
+
+                    <div id="financialHealthCard"></div>
+
+                    <div id="savingsCard"></div>
+
+                    <div id="investmentCard"></div>
+
+                    <div id="cashflowChart"></div>
+
+                    <div id="balanceChart"></div>
+
+                    <div id="recentTransactions"></div>
+
+                </div>
+
+            </section>
+
+            <!-- ================================================= -->
+            <!-- ДОХОДЫ И РАСХОДЫ -->
+            <!-- ================================================= -->
+
+            <section
+                class="page"
+                id="transactions">
+
+                <div id="transactionToolbar"></div>
+
+                <div id="transactionFilters"></div>
+
+                <div id="transactionTable"></div>
+
+            </section>
+
+            <!-- ================================================= -->
+            <!-- ПОДРАБОТКИ -->
+            <!-- ================================================= -->
+
+            <section
+                class="page"
+                id="sidejobs">
+
+                <div id="sidejobStatistics"></div>
+
+                <div id="sidejobTable"></div>
+
+            </section>
+
+            <!-- ================================================= -->
+            <!-- ИНВЕСТИЦИИ -->
+            <!-- ================================================= -->
+
+            <section
+                class="page"
+                id="investments">
+
+                <div id="investmentOverview"></div>
+
+                <div id="investmentTable"></div>
+
+            </section>
+
+            <!-- ================================================= -->
+            <!-- НАКОПЛЕНИЯ -->
+            <!-- ================================================= -->
+
+            <section
+                class="page"
+                id="savings">
+
+                <div id="accounts"></div>
+
+                <div id="goals"></div>
+
+            </section>
+
+            <!-- ================================================= -->
+            <!-- АНАЛИТИКА -->
+            <!-- ================================================= -->
+
+            <section
+                class="page"
+                id="analytics">
+
+                <div id="analyticsToolbar"></div>
+
+                <div id="analyticsGrid"></div>
+
+            </section>
+
+            <!-- ================================================= -->
+            <!-- КАЛЕНДАРЬ -->
+            <!-- ================================================= -->
+
+            <section
+                class="page"
+                id="calendar">
+
+                <div id="calendarContainer"></div>
+
+            </section>
+
+            <!-- ================================================= -->
+            <!-- ОТЧЁТЫ -->
+            <!-- ================================================= -->
+
+            <section
+                class="page"
+                id="reports">
+
+                <div id="reportGenerator"></div>
+
+                <div id="reportPreview"></div>
+
+            </section>
+
+            <!-- ================================================= -->
+            <!-- НАСТРОЙКИ -->
+            <!-- ================================================= -->
+
+            <section
+                class="page"
+                id="settings">
+
+                <div id="settingsContainer"></div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <!-- ====================================================== -->
+    <!-- МОДАЛЬНЫЕ ОКНА -->
+    <!-- ====================================================== -->
+
+    <div id="modalOverlay">
+
+        <div id="modalWindow">
+
+            <div id="modalContent">
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ====================================================== -->
+    <!-- TOAST -->
+    <!-- ====================================================== -->
+
+    <div id="toastContainer"></div>
+
+
+    <!-- ====================================================== -->
+    <!-- JAVASCRIPT -->
+    <!-- ====================================================== -->
+
+    <script src="js/storage.js"></script>
+
+    <script src="js/dashboard.js"></script>
+
+    <script src="js/transactions.js"></script>
+
+    <script src="js/sidejobs.js"></script>
+
+    <script src="js/investments.js"></script>
+
+    <script src="js/savings.js"></script>
+
+    <script src="js/analytics.js"></script>
+
+    <script src="js/calendar.js"></script>
+
+    <script src="js/reports.js"></script>
+
+    <script src="js/settings.js"></script>
+
+    <script src="js/ui.js"></script>
+
+    <script src="js/app.js"></script>
+
+</body>
+
+</html>
