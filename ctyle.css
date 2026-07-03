@@ -1,0 +1,209 @@
+/* =======================================================
+   ФИНАНСОВЫЙ АССИСТЕНТ
+   style.css
+======================================================= */
+
+
+/* ==========================
+   СБРОС
+========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+
+    font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+    background:#f5f7fb;
+
+    color:#222;
+
+    overflow:hidden;
+
+}
+
+
+/* ==========================
+   ПЕРЕМЕННЫЕ
+========================== */
+
+:root{
+
+    --primary:#3478F6;
+
+    --success:#23C16B;
+
+    --warning:#F6B100;
+
+    --danger:#F04F4F;
+
+    --text:#1E1E1E;
+
+    --gray:#8B8B8B;
+
+    --light:#F5F7FB;
+
+    --white:#FFFFFF;
+
+    --border:#ECECEC;
+
+    --radius:28px;
+
+    --shadow:
+
+    0 10px 30px rgba(0,0,0,.05);
+
+}
+
+
+/* ==========================
+   APP
+========================== */
+
+#app{
+
+    display:flex;
+
+    width:100vw;
+
+    height:100vh;
+
+}
+
+
+/* ==========================
+   SIDEBAR
+========================== */
+
+#sidebar{
+
+    width:280px;
+
+    background:white;
+
+    border-right:1px solid var(--border);
+
+    display:flex;
+
+    flex-direction:column;
+
+    padding:30px;
+
+}
+
+.logo{
+
+    font-size:26px;
+
+    font-weight:700;
+
+    margin-bottom:50px;
+
+}
+
+nav{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:12px;
+
+}
+
+nav button{
+
+    height:52px;
+
+    border:none;
+
+    background:transparent;
+
+    border-radius:18px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    text-align:left;
+
+    padding-left:18px;
+
+    font-size:16px;
+
+}
+
+nav button:hover{
+
+    background:#eef5ff;
+
+}
+
+nav button.active{
+
+    background:var(--primary);
+
+    color:white;
+
+}
+
+
+/* ==========================
+   CONTENT
+========================== */
+
+#content{
+
+    flex:1;
+
+    overflow:auto;
+
+    padding:35px;
+
+}
+
+
+/* ==========================
+   TOPBAR
+========================== */
+
+#topbar{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:35px;
+
+}
+
+#pageTitle{
+
+    font-size:34px;
+
+    font-weight:700;
+
+}
+
+#topActions{
+
+    display:flex;
+
+    gap:15px;
+
+}
