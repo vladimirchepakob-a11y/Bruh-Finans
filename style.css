@@ -1,0 +1,432 @@
+/* ==========================================================
+   ФИНАНСОВЫЙ АССИСТЕНТ
+   style.css
+========================================================== */
+
+/* =======================
+   RESET
+======================= */
+
+*,
+*::before,
+*::after{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+
+    font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+
+    background:#f4f6fb;
+
+    color:#1d1d1f;
+
+    overflow:hidden;
+
+    -webkit-font-smoothing:antialiased;
+
+}
+
+/* =======================
+   ПЕРЕМЕННЫЕ
+======================= */
+
+:root{
+
+    --primary:#3478F6;
+    --primaryLight:#EDF4FF;
+
+    --success:#26C26B;
+
+    --danger:#FF5A5F;
+
+    --warning:#FDBB2D;
+
+    --text:#1E1E1E;
+
+    --gray:#7B7B7B;
+
+    --light:#F4F6FB;
+
+    --white:#ffffff;
+
+    --border:#ECECEC;
+
+    --radius:28px;
+
+    --shadow:
+    0 10px 25px rgba(0,0,0,.05);
+
+    --transition:.25s;
+
+}
+
+/* =======================
+   APP
+======================= */
+
+#app{
+
+    display:flex;
+
+    width:100vw;
+
+    height:100vh;
+
+}
+
+/* =======================
+   SIDEBAR
+======================= */
+
+#sidebar{
+
+    width:270px;
+
+    background:white;
+
+    border-right:1px solid var(--border);
+
+    display:flex;
+
+    flex-direction:column;
+
+    padding:30px;
+
+    flex-shrink:0;
+
+}
+
+.logo{
+
+    font-size:28px;
+
+    font-weight:700;
+
+    margin-bottom:45px;
+
+}
+
+nav{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:12px;
+
+}
+
+nav button{
+
+    width:100%;
+
+    height:54px;
+
+    border:none;
+
+    border-radius:18px;
+
+    background:transparent;
+
+    cursor:pointer;
+
+    transition:var(--transition);
+
+    font-size:16px;
+
+    text-align:left;
+
+    padding-left:18px;
+
+}
+
+nav button:hover{
+
+    background:#eef4ff;
+
+}
+
+nav button.active{
+
+    background:var(--primary);
+
+    color:white;
+
+}
+
+/* =======================
+   CONTENT
+======================= */
+
+#content{
+
+    flex:1;
+
+    overflow:auto;
+
+    padding:35px;
+
+}
+
+/* =======================
+   TOPBAR
+======================= */
+
+#topbar{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:35px;
+
+}
+
+#pageTitle{
+
+    font-size:34px;
+
+    font-weight:700;
+
+}
+
+#topActions{
+
+    display:flex;
+
+    gap:14px;
+
+}
+
+#topActions button{
+
+    height:46px;
+
+    padding:0 22px;
+
+    border:none;
+
+    background:white;
+
+    border-radius:16px;
+
+    box-shadow:var(--shadow);
+
+    cursor:pointer;
+
+    transition:var(--transition);
+
+}
+
+#topActions button:hover{
+
+    transform:translateY(-2px);
+
+}
+
+/* =======================
+   PAGE
+======================= */
+
+.page{
+
+    display:block;
+
+}
+
+/* =======================
+   GRID
+======================= */
+
+.grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(12,1fr);
+
+    gap:22px;
+
+}
+
+/* =======================
+   CARD
+======================= */
+
+.card{
+
+    background:white;
+
+    border-radius:28px;
+
+    padding:26px;
+
+    box-shadow:var(--shadow);
+
+    transition:.25s;
+
+}
+
+.card:hover{
+
+    transform:translateY(-3px);
+
+}
+
+/* =======================
+   TYPOGRAPHY
+======================= */
+
+h1{
+
+    font-size:34px;
+
+}
+
+h2{
+
+    font-size:26px;
+
+}
+
+h3{
+
+    font-size:20px;
+
+}
+
+p{
+
+    color:var(--gray);
+
+    line-height:1.5;
+
+}
+
+/* =======================
+   BUTTONS
+======================= */
+
+button{
+
+    font-family:inherit;
+
+}
+
+.btn{
+
+    height:50px;
+
+    padding:0 22px;
+
+    border:none;
+
+    border-radius:18px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.btn-primary{
+
+    background:var(--primary);
+
+    color:white;
+
+}
+
+.btn-secondary{
+
+    background:var(--primaryLight);
+
+    color:var(--primary);
+
+}
+
+.btn:hover{
+
+    transform:translateY(-2px);
+
+}
+
+/* =======================
+   INPUTS
+======================= */
+
+input,
+select,
+textarea{
+
+    width:100%;
+
+    height:54px;
+
+    border:1px solid var(--border);
+
+    border-radius:18px;
+
+    padding:15px;
+
+    outline:none;
+
+    transition:.25s;
+
+    background:white;
+
+}
+
+textarea{
+
+    resize:none;
+
+    min-height:120px;
+
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+
+    border-color:var(--primary);
+
+}
+
+/* =======================
+   SCROLLBAR
+======================= */
+
+::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#d9d9d9;
+
+    border-radius:30px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:transparent;
+
+}
