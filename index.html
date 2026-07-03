@@ -1,0 +1,2563 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+
+<meta
+name="theme-color"
+content="#ffffff">
+
+<title>Finance Pro</title>
+
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+rel="stylesheet">
+
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<link
+rel="stylesheet"
+href="css/style.css">
+
+</head>
+
+<body>
+
+<div id="app">
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+<div class="logo">
+
+<div class="logo-icon">
+💰
+</div>
+
+<div class="logo-text">
+
+<h1>
+Finance Pro
+</h1>
+
+<p>
+Ultimate Finance Manager
+</p>
+
+</div>
+
+</div>
+
+<nav class="menu">
+
+<button
+class="menu-item active"
+data-page="dashboard">
+
+<span>🏠</span>
+
+<span>
+Главная
+</span>
+
+</button>
+
+<button
+class="menu-item"
+data-page="transactions">
+
+<span>💳</span>
+
+<span>
+Доходы и расходы
+</span>
+
+</button>
+
+<button
+class="menu-item"
+data-page="jobs">
+
+<span>💼</span>
+
+<span>
+Подработки
+</span>
+
+</button>
+
+<button
+class="menu-item"
+data-page="investments">
+
+<span>🖥️</span>
+
+<span>
+Инвестиции
+</span>
+
+</button>
+
+<button
+class="menu-item"
+data-page="savings">
+
+<span>🏦</span>
+
+<span>
+Накопления
+</span>
+
+</button>
+
+<button
+class="menu-item"
+data-page="analytics">
+
+<span>📈</span>
+
+<span>
+Аналитика
+</span>
+
+</button>
+
+<button
+class="menu-item"
+data-page="calendar">
+
+<span>📅</span>
+
+<span>
+Календарь
+</span>
+
+</button>
+
+<button
+class="menu-item"
+data-page="reports">
+
+<span>📄</span>
+
+<span>
+Отчеты
+</span>
+
+</button>
+
+<button
+class="menu-item"
+data-page="settings">
+
+<span>⚙️</span>
+
+<span>
+Настройки
+</span>
+
+</button>
+
+</nav>
+
+</aside>
+
+<main class="main">
+
+<header class="topbar">
+
+<div>
+
+<h2>
+Финансовая панель
+</h2>
+
+<p>
+Полный контроль над деньгами
+</p>
+
+</div>
+
+<div class="top-actions">
+
+<button
+id="backupBtn"
+class="btn-light">
+
+Экспорт
+
+</button>
+
+<button
+id="restoreBtn"
+class="btn-blue">
+
+Импорт
+
+</button>
+
+</div>
+
+</header>
+<!-- ========================= -->
+<!-- DASHBOARD -->
+<!-- ========================= -->
+
+<section
+id="dashboardPage"
+class="page active-page">
+
+<div class="cards-grid">
+
+<div class="stat-card balance">
+
+<div class="card-icon">
+💰
+</div>
+
+<div class="card-info">
+
+<div class="card-title">
+Общий баланс
+</div>
+
+<div
+id="totalBalance"
+class="card-value">
+
+0 ₽
+
+</div>
+
+<div
+id="balanceDiff"
+class="card-diff positive">
+
++0%
+
+</div>
+
+</div>
+
+</div>
+
+<div class="stat-card income">
+
+<div class="card-icon">
+📈
+</div>
+
+<div class="card-info">
+
+<div class="card-title">
+Доходы
+</div>
+
+<div
+id="totalIncome"
+class="card-value">
+
+0 ₽
+
+</div>
+
+<div
+id="incomeDiff"
+class="card-diff positive">
+
++0%
+
+</div>
+
+</div>
+
+</div>
+
+<div class="stat-card expense">
+
+<div class="card-icon">
+📉
+</div>
+
+<div class="card-info">
+
+<div class="card-title">
+Расходы
+</div>
+
+<div
+id="totalExpenses"
+class="card-value">
+
+0 ₽
+
+</div>
+
+<div
+id="expenseDiff"
+class="card-diff negative">
+
+0%
+
+</div>
+
+</div>
+
+</div>
+
+<div class="stat-card savings">
+
+<div class="card-icon">
+🏦
+</div>
+
+<div class="card-info">
+
+<div class="card-title">
+Накопления
+</div>
+
+<div
+id="totalSavings"
+class="card-value">
+
+0 ₽
+
+</div>
+
+<div class="card-diff">
+
+Цели
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ========================= -->
+<!-- FINANCIAL HEALTH -->
+<!-- ========================= -->
+
+<div class="health-card">
+
+<div class="health-left">
+
+<h3>
+
+Финансовое здоровье
+
+</h3>
+
+<p>
+
+Общий рейтинг финансов
+
+</p>
+
+<div class="health-progress">
+
+<div
+id="healthFill"
+class="health-fill">
+
+</div>
+
+</div>
+
+<div class="health-labels">
+
+<span>
+
+Плохо
+
+</span>
+
+<span>
+
+Нормально
+
+</span>
+
+<span>
+
+Отлично
+
+</span>
+
+</div>
+
+</div>
+
+<div class="health-right">
+
+<div
+id="healthCircle"
+class="health-circle">
+
+<div
+id="healthScore">
+
+0
+
+</div>
+
+<small>
+
+из 100
+
+</small>
+
+</div>
+
+<div
+id="healthStatus"
+class="health-status">
+
+Недостаточно данных
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ========================= -->
+<!-- SURVIVAL -->
+<!-- ========================= -->
+
+<div class="survival-card">
+
+<div>
+
+<h3>
+
+Финансовая подушка
+
+</h3>
+
+<p>
+
+Если перестать работать сегодня
+
+</p>
+
+</div>
+
+<div
+id="survivalDays"
+class="survival-days">
+
+0 дней
+
+</div>
+
+</div>
+
+<!-- ========================= -->
+<!-- QUICK ANALYTICS -->
+<!-- ========================= -->
+
+<div class="mini-cards">
+
+<div class="mini-card">
+
+<span>
+
+Средний доход
+
+</span>
+
+<b id="avgIncome">
+
+0 ₽
+
+</b>
+
+</div>
+
+<div class="mini-card">
+
+<span>
+
+Средний расход
+
+</span>
+
+<b id="avgExpense">
+
+0 ₽
+
+</b>
+
+</div>
+
+<div class="mini-card">
+
+<span>
+
+Средняя операция
+
+</span>
+
+<b id="avgTransaction">
+
+0 ₽
+
+</b>
+
+</div>
+
+<div class="mini-card">
+
+<span>
+
+Лучший месяц
+
+</span>
+
+<b id="bestMonth">
+
+—
+
+</b>
+
+</div>
+
+</div>
+<!-- ========================= -->
+<!-- CHARTS -->
+<!-- ========================= -->
+
+<div class="charts-grid">
+
+<div class="chart-card">
+
+<div class="chart-top">
+
+<h3>
+Денежный поток
+</h3>
+
+<select id="cashFlowPeriod">
+
+<option value="7">
+7 дней
+</option>
+
+<option value="30" selected>
+30 дней
+</option>
+
+<option value="365">
+Год
+</option>
+
+</select>
+
+</div>
+
+<canvas
+id="cashFlowChart">
+</canvas>
+
+</div>
+
+<div class="chart-card">
+
+<div class="chart-top">
+
+<h3>
+Доходы и расходы
+</h3>
+
+<select id="incomeExpensePeriod">
+
+<option value="month" selected>
+Месяц
+</option>
+
+<option value="year">
+Год
+</option>
+
+</select>
+
+</div>
+
+<canvas
+id="incomeExpenseChart">
+</canvas>
+
+</div>
+
+</div>
+
+<div class="charts-grid">
+
+<div class="chart-card">
+
+<div class="chart-top">
+
+<h3>
+Категории расходов
+</h3>
+
+</div>
+
+<canvas
+id="expenseCategoryChart">
+</canvas>
+
+</div>
+
+<div class="chart-card">
+
+<div class="chart-top">
+
+<h3>
+Категории доходов
+</h3>
+
+</div>
+
+<canvas
+id="incomeCategoryChart">
+</canvas>
+
+</div>
+
+</div>
+
+<!-- ========================= -->
+<!-- LAST OPERATIONS -->
+<!-- ========================= -->
+
+<div class="recent-card">
+
+<div class="section-header">
+
+<h3>
+
+Последние операции
+
+</h3>
+
+<button
+class="primary-btn"
+data-page-open="transactions">
+
+Все операции
+
+</button>
+
+</div>
+
+<div
+id="recentTransactions"
+class="recent-list">
+
+<div class="empty-state">
+
+Пока нет операций
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ========================= -->
+<!-- QUICK ACTIONS -->
+<!-- ========================= -->
+
+<div class="quick-actions">
+
+<button
+id="quickIncome"
+class="action-card">
+
+<div class="action-icon">
+💵
+</div>
+
+<div>
+
+<h4>
+Добавить доход
+</h4>
+
+<p>
+Записать поступление денег
+</p>
+
+</div>
+
+</button>
+
+<button
+id="quickExpense"
+class="action-card">
+
+<div class="action-icon">
+💸
+</div>
+
+<div>
+
+<h4>
+Добавить расход
+</h4>
+
+<p>
+Записать покупку
+</p>
+
+</div>
+
+</button>
+
+<button
+id="quickJob"
+class="action-card">
+
+<div class="action-icon">
+💼
+</div>
+
+<div>
+
+<h4>
+Новая работа
+</h4>
+
+<p>
+Добавить подработку
+</p>
+
+</div>
+
+</button>
+
+<button
+id="quickInvestment"
+class="action-card">
+
+<div class="action-icon">
+🖥️
+</div>
+
+<div>
+
+<h4>
+Инвестиция
+</h4>
+
+<p>
+Добавить покупку
+</p>
+
+</div>
+
+</button>
+
+</div>
+
+</section>
+
+<!-- ================================= -->
+<!-- TRANSACTIONS PAGE -->
+<!-- ================================= -->
+
+<section
+id="transactionsPage"
+class="page">
+<!-- ================================= -->
+<!-- TRANSACTIONS -->
+<!-- ================================= -->
+
+<div class="page-header">
+
+<div>
+
+<h2>
+Доходы и расходы
+</h2>
+
+<p>
+Добавляйте и анализируйте каждую операцию
+</p>
+
+</div>
+
+<button
+id="addTransactionBtn"
+class="primary-btn">
+
++ Новая операция
+
+</button>
+
+</div>
+
+<!-- ФОРМА -->
+
+<div class="form-card">
+
+<div class="form-grid">
+
+<div class="form-group">
+
+<label>
+
+Тип операции
+
+</label>
+
+<select id="transactionType">
+
+<option value="income">
+
+Доход
+
+</option>
+
+<option value="expense">
+
+Расход
+
+</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+Категория
+
+</label>
+
+<select id="transactionCategory">
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+Подкатегория
+
+</label>
+
+<input
+type="text"
+id="transactionSubcategory"
+placeholder="Например: Продукты">
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+Сумма
+
+</label>
+
+<input
+type="number"
+id="transactionAmount"
+placeholder="0">
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+Дата
+
+</label>
+
+<input
+type="date"
+id="transactionDate">
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+Время
+
+</label>
+
+<input
+type="time"
+id="transactionTime">
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+Способ оплаты
+
+</label>
+
+<select id="transactionPayment">
+
+<option>
+
+Наличные
+
+</option>
+
+<option>
+
+Карта
+
+</option>
+
+<option>
+
+Перевод
+
+</option>
+
+<option>
+
+Криптовалюта
+
+</option>
+
+<option>
+
+Другое
+
+</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+Счет
+
+</label>
+
+<select id="transactionAccount">
+
+<option>
+
+Основной
+
+</option>
+
+<option>
+
+Наличные
+
+</option>
+
+<option>
+
+Карта
+
+</option>
+
+<option>
+
+Сбережения
+
+</option>
+
+</select>
+
+</div>
+
+<div class="form-group full-width">
+
+<label>
+
+Комментарий
+
+</label>
+
+<textarea
+id="transactionComment"
+rows="3"
+placeholder="Описание операции..."></textarea>
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+Важность
+
+</label>
+
+<select id="transactionPriority">
+
+<option>
+
+Обычная
+
+</option>
+
+<option>
+
+Важная
+
+</option>
+
+<option>
+
+Очень важная
+
+</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+Повторять
+
+</label>
+
+<select id="transactionRepeat">
+
+<option>
+
+Нет
+
+</option>
+
+<option>
+
+Каждый день
+
+</option>
+
+<option>
+
+Каждую неделю
+
+</option>
+
+<option>
+
+Каждый месяц
+
+</option>
+
+<option>
+
+Каждый год
+
+</option>
+
+</select>
+
+</div>
+
+<div class="form-group full-width">
+
+<button
+id="saveTransaction"
+class="primary-btn">
+
+Сохранить операцию
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ФИЛЬТРЫ -->
+
+<div class="filters-card">
+
+<input
+type="text"
+id="searchTransaction"
+placeholder="🔍 Поиск...">
+
+<select id="filterType">
+
+<option value="all">
+
+Все операции
+
+</option>
+
+<option value="income">
+
+Доходы
+
+</option>
+
+<option value="expense">
+
+Расходы
+
+</option>
+
+</select>
+
+<select id="filterCategory">
+
+<option>
+
+Все категории
+
+</option>
+
+</select>
+
+<input
+type="date"
+id="filterFrom">
+
+<input
+type="date"
+id="filterTo">
+
+<button
+id="clearFilters"
+class="secondary-btn">
+
+Очистить
+
+</button>
+
+</div>
+
+<!-- СПИСОК ОПЕРАЦИЙ -->
+
+<div class="table-card">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Дата</th>
+
+<th>Категория</th>
+
+<th>Описание</th>
+
+<th>Счет</th>
+
+<th>Тип</th>
+
+<th>Сумма</th>
+
+<th></th>
+
+</tr>
+
+</thead>
+
+<tbody
+id="transactionsTable">
+
+<tr>
+
+<td
+colspan="7"
+class="empty-state">
+
+Нет операций
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</section>
+
+<!-- ============================= -->
+<!-- JOBS PAGE -->
+<!-- ============================= -->
+
+<section
+id="jobsPage"
+class="page">
+<!-- ============================= -->
+<!-- JOBS PAGE -->
+<!-- ============================= -->
+
+<div class="page-header">
+
+<div>
+
+<h2>
+Подработки и работы
+</h2>
+
+<p>
+Учет всех заказов, клиентов и заработка
+</p>
+
+</div>
+
+<button
+id="addJobBtn"
+class="primary-btn">
+
++ Новая работа
+
+</button>
+
+</div>
+
+<!-- СТАТИСТИКА -->
+
+<div class="cards-grid">
+
+<div class="stat-card">
+
+<div class="card-title">
+Всего заработано
+</div>
+
+<div
+id="jobsIncome">
+
+0 ₽
+
+</div>
+
+</div>
+
+<div class="stat-card">
+
+<div class="card-title">
+Часов отработано
+</div>
+
+<div
+id="jobsHours">
+
+0 ч
+
+</div>
+
+</div>
+
+<div class="stat-card">
+
+<div class="card-title">
+Средняя ставка
+</div>
+
+<div
+id="hourRate">
+
+0 ₽/ч
+
+</div>
+
+</div>
+
+<div class="stat-card">
+
+<div class="card-title">
+Активных работ
+</div>
+
+<div
+id="activeJobs">
+
+0
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ФОРМА -->
+
+<div class="form-card">
+
+<div class="form-grid">
+
+<div class="form-group">
+
+<label>
+
+Название работы
+
+</label>
+
+<input
+type="text"
+id="jobName"
+placeholder="Монтаж пола">
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+Клиент
+
+</label>
+
+<input
+type="text"
+id="jobClient"
+placeholder="Иван">
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+Категория
+
+</label>
+
+<select id="jobCategory">
+
+<option>Строительство</option>
+<option>Фриланс</option>
+<option>Доставка</option>
+<option>Ремонт</option>
+<option>IT</option>
+<option>Дизайн</option>
+<option>Другое</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+Дата
+
+</label>
+
+<input
+type="date"
+id="jobDate">
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+Начало
+
+</label>
+
+<input
+type="time"
+id="jobStart">
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+Конец
+
+</label>
+
+<input
+type="time"
+id="jobEnd">
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+Часов
+
+</label>
+
+<input
+type="number"
+id="jobHours"
+step="0.5"
+placeholder="0">
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+Получено
+
+</label>
+
+<input
+type="number"
+id="jobIncome"
+placeholder="0">
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+Расходы
+
+</label>
+
+<input
+type="number"
+id="jobExpense"
+placeholder="0">
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+Статус
+
+</label>
+
+<select id="jobStatus">
+
+<option>В работе</option>
+<option>Завершено</option>
+<option>Отменено</option>
+
+</select>
+
+</div>
+
+<div class="form-group full-width">
+
+<label>
+
+Описание
+
+</label>
+
+<textarea
+id="jobComment"
+rows="3"
+placeholder="Описание выполненной работы"></textarea>
+
+</div>
+
+<div class="form-group full-width">
+
+<button
+id="saveJob"
+class="primary-btn">
+
+Сохранить работу
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ГРАФИК -->
+
+<div class="chart-card">
+
+<div class="chart-top">
+
+<h3>
+
+Доход по работам
+
+</h3>
+
+</div>
+
+<canvas
+id="jobsChart">
+
+</canvas>
+
+</div>
+
+<!-- ТАБЛИЦА -->
+
+<div class="table-card">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Дата</th>
+
+<th>Работа</th>
+
+<th>Клиент</th>
+
+<th>Часы</th>
+
+<th>Доход</th>
+
+<th>Расход</th>
+
+<th>Прибыль</th>
+
+<th></th>
+
+</tr>
+
+</thead>
+
+<tbody
+id="jobsTable">
+
+<tr>
+
+<td
+colspan="8"
+class="empty-state">
+
+Нет записей
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</section>
+
+<!-- ============================= -->
+<!-- INVESTMENTS PAGE -->
+<!-- ============================= -->
+
+<section
+id="investmentsPage"
+class="page">
+<!-- ================================= -->
+<!-- INVESTMENTS PAGE -->
+<!-- ================================= -->
+
+<div class="page-header">
+
+<div>
+
+<h2>
+Инвестиции
+</h2>
+
+<p>
+Покупки, которые должны приносить деньги
+</p>
+
+</div>
+
+<button
+id="addInvestmentBtn"
+class="primary-btn">
+
++ Добавить инвестицию
+
+</button>
+
+</div>
+
+<!-- СТАТИСТИКА -->
+
+<div class="cards-grid">
+
+<div class="stat-card">
+
+<div class="card-title">
+Вложено
+</div>
+
+<div
+id="investmentSpent"
+class="card-value">
+
+0 ₽
+
+</div>
+
+</div>
+
+<div class="stat-card">
+
+<div class="card-title">
+Получено
+</div>
+
+<div
+id="investmentEarned"
+class="card-value">
+
+0 ₽
+
+</div>
+
+</div>
+
+<div class="stat-card">
+
+<div class="card-title">
+Окупилось
+</div>
+
+<div
+id="investmentReturned"
+class="card-value">
+
+0%
+
+</div>
+
+</div>
+
+<div class="stat-card">
+
+<div class="card-title">
+Прибыль
+</div>
+
+<div
+id="investmentProfit"
+class="card-value">
+
+0 ₽
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ФОРМА -->
+
+<div class="form-card">
+
+<div class="form-grid">
+
+<div class="form-group">
+
+<label>
+
+Название
+
+</label>
+
+<input
+type="text"
+id="investmentName"
+placeholder="Игровой ПК">
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+Категория
+
+</label>
+
+<select id="investmentCategory">
+
+<option>Компьютер</option>
+
+<option>Телефон</option>
+
+<option>Автомобиль</option>
+
+<option>Оборудование</option>
+
+<option>Инструмент</option>
+
+<option>Камера</option>
+
+<option>Другое</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+Дата покупки
+
+</label>
+
+<input
+type="date"
+id="investmentDate">
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+Стоимость
+
+</label>
+
+<input
+type="number"
+id="investmentCost"
+placeholder="0">
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+Уже принесло
+
+</label>
+
+<input
+type="number"
+id="investmentIncome"
+placeholder="0">
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+Срок службы (лет)
+
+</label>
+
+<input
+type="number"
+id="investmentLife"
+placeholder="5">
+
+</div>
+
+<div class="form-group full-width">
+
+<label>
+
+Описание
+
+</label>
+
+<textarea
+id="investmentDescription"
+rows="3"
+placeholder="Например: используется для монтажа видео"></textarea>
+
+</div>
+
+<div class="form-group full-width">
+
+<button
+id="saveInvestment"
+class="primary-btn">
+
+Сохранить инвестицию
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ГРАФИК -->
+
+<div class="chart-card">
+
+<div class="chart-top">
+
+<h3>
+
+Окупаемость инвестиций
+
+</h3>
+
+</div>
+
+<canvas
+id="investmentChart">
+
+</canvas>
+
+</div>
+
+<!-- СПИСОК -->
+
+<div
+id="investmentList"
+class="investment-list">
+
+<div class="empty-state">
+
+Инвестиций пока нет
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ================================= -->
+<!-- SAVINGS PAGE -->
+<!-- ================================= -->
+
+<section
+id="savingsPage"
+class="page">
+<!-- ================================= -->
+<!-- SAVINGS PAGE -->
+<!-- ================================= -->
+
+<div class="page-header">
+
+<div>
+
+<h2>
+Накопления
+</h2>
+
+<p>
+Контролируйте финансовые цели и подушку безопасности
+</p>
+
+</div>
+
+<button
+id="addGoalBtn"
+class="primary-btn">
+
++ Новая цель
+
+</button>
+
+</div>
+
+<!-- КАРТОЧКИ -->
+
+<div class="cards-grid">
+
+<div class="stat-card">
+
+<div class="card-title">
+
+Всего накоплено
+
+</div>
+
+<div
+id="savedMoney"
+class="card-value">
+
+0 ₽
+
+</div>
+
+</div>
+
+<div class="stat-card">
+
+<div class="card-title">
+
+Количество целей
+
+</div>
+
+<div
+id="goalCount"
+class="card-value">
+
+0
+
+</div>
+
+</div>
+
+<div class="stat-card">
+
+<div class="card-title">
+
+Средний прогресс
+
+</div>
+
+<div
+id="goalProgress"
+class="card-value">
+
+0%
+
+</div>
+
+</div>
+
+<div class="stat-card">
+
+<div class="card-title">
+
+До завершения
+
+</div>
+
+<div
+id="goalRemaining"
+class="card-value">
+
+0 ₽
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ФОРМА -->
+
+<div class="form-card">
+
+<div class="form-grid">
+
+<div class="form-group">
+
+<label>
+
+Название цели
+
+</label>
+
+<input
+type="text"
+id="goalName"
+placeholder="Новый компьютер">
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+Категория
+
+</label>
+
+<select id="goalCategory">
+
+<option>Финансовая подушка</option>
+
+<option>Компьютер</option>
+
+<option>Телефон</option>
+
+<option>Автомобиль</option>
+
+<option>Путешествие</option>
+
+<option>Обучение</option>
+
+<option>Другое</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+Необходимо
+
+</label>
+
+<input
+type="number"
+id="goalTarget"
+placeholder="150000">
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+Уже накоплено
+
+</label>
+
+<input
+type="number"
+id="goalCurrent"
+placeholder="0">
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+Ежемесячно откладываю
+
+</label>
+
+<input
+type="number"
+id="goalMonthly"
+placeholder="10000">
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+Крайний срок
+
+</label>
+
+<input
+type="date"
+id="goalDeadline">
+
+</div>
+
+<div class="form-group full-width">
+
+<label>
+
+Комментарий
+
+</label>
+
+<textarea
+id="goalComment"
+rows="3"
+placeholder="Любые заметки"></textarea>
+
+</div>
+
+<div class="form-group full-width">
+
+<button
+id="saveGoal"
+class="primary-btn">
+
+Сохранить цель
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- СПИСОК ЦЕЛЕЙ -->
+
+<div
+id="goalList"
+class="goal-list">
+
+<div class="empty-state">
+
+Финансовых целей пока нет
+
+</div>
+
+</div>
+
+<!-- ГРАФИК -->
+
+<div class="chart-card">
+
+<div class="chart-top">
+
+<h3>
+
+Рост накоплений
+
+</h3>
+
+</div>
+
+<canvas
+id="savingsChart">
+
+</canvas>
+
+</div>
+
+</section>
+
+<!-- ================================= -->
+<!-- ANALYTICS PAGE -->
+<!-- ================================= -->
+
+<section
+id="analyticsPage"
+class="page">
+<!-- ================================= -->
+<!-- ANALYTICS PAGE -->
+<!-- ================================= -->
+
+<div class="page-header">
+
+<div>
+
+<h2>
+Финансовая аналитика
+</h2>
+
+<p>
+Полная статистика и сравнение всех финансов
+</p>
+
+</div>
+
+<div class="header-actions">
+
+<select id="analyticsPeriod">
+
+<option value="week">
+
+Неделя
+
+</option>
+
+<option value="month" selected>
+
+Месяц
+
+</option>
+
+<option value="quarter">
+
+Квартал
+
+</option>
+
+<option value="year">
+
+Год
+
+</option>
+
+<option value="all">
+
+За всё время
+
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+<!-- KPI -->
+
+<div class="cards-grid">
+
+<div class="stat-card">
+
+<div class="card-title">
+
+Чистая прибыль
+
+</div>
+
+<div
+id="netProfit"
+class="card-value">
+
+0 ₽
+
+</div>
+
+</div>
+
+<div class="stat-card">
+
+<div class="card-title">
+
+Средний доход
+
+</div>
+
+<div
+id="analyticsAvgIncome"
+class="card-value">
+
+0 ₽
+
+</div>
+
+</div>
+
+<div class="stat-card">
+
+<div class="card-title">
+
+Средний расход
+
+</div>
+
+<div
+id="analyticsAvgExpense"
+class="card-value">
+
+0 ₽
+
+</div>
+
+</div>
+
+<div class="stat-card">
+
+<div class="card-title">
+
+Экономия
+
+</div>
+
+<div
+id="savingPercent"
+class="card-value">
+
+0%
+
+</div>
+
+</div>
+
+</div>
+
+<!-- СРАВНЕНИЕ -->
+
+<div class="compare-card">
+
+<h3>
+
+Сравнение периодов
+
+</h3>
+
+<div class="compare-grid">
+
+<div class="form-group">
+
+<label>
+
+Период №1
+
+</label>
+
+<input
+type="month"
+id="compareFirst">
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+Период №2
+
+</label>
+
+<input
+type="month"
+id="compareSecond">
+
+</div>
+
+<button
+id="compareButton"
+class="primary-btn">
+
+Сравнить
+
+</button>
+
+</div>
+
+<div
+id="compareResult"
+class="compare-result">
+
+Выберите два периода
+
+</div>
+
+</div>
+
+<!-- ГРАФИКИ -->
+
+<div class="charts-grid">
+
+<div class="chart-card">
+
+<div class="chart-top">
+
+<h3>
+
+Изменение баланса
+
+</h3>
+
+</div>
+
+<canvas
+id="balanceHistoryChart">
+
+</canvas>
+
+</div>
+
+<div class="chart-card">
+
+<div class="chart-top">
+
+<h3>
+
+Динамика накоплений
+
+</h3>
+
+</div>
+
+<canvas
+id="analyticsSavingsChart">
+
+</canvas>
+
+</div>
+
+</div>
+
+<div class="charts-grid">
+
+<div class="chart-card">
+
+<div class="chart-top">
+
+<h3>
+
+Топ расходов
+
+</h3>
+
+</div>
+
+<canvas
+id="topExpenseChart">
+
+</canvas>
+
+</div>
+
+<div class="chart-card">
+
+<div class="chart-top">
+
+<h3>
+
+Топ доходов
+
+</h3>
+
+</div>
+
+<canvas
+id="topIncomeChart">
+
+</canvas>
+
+</div>
+
+</div>
+
+<!-- ДОПОЛНИТЕЛЬНАЯ СТАТИСТИКА -->
+
+<div class="analytics-grid">
+
+<div class="analytics-item">
+
+<span>
+
+Самый прибыльный месяц
+
+</span>
+
+<strong id="bestMonthAnalytics">
+
+—
+
+</strong>
+
+</div>
+
+<div class="analytics-item">
+
+<span>
+
+Самый затратный месяц
+
+</span>
+
+<strong id="worstMonthAnalytics">
+
+—
+
+</strong>
+
+</div>
+
+<div class="analytics-item">
+
+<span>
+
+Средний чек
+
+</span>
+
+<strong id="averageCheck">
+
+0 ₽
+
+</strong>
+
+</div>
+
+<div class="analytics-item">
+
+<span>
+
+Количество операций
+
+</span>
+
+<strong id="operationCount">
+
+0
+
+</strong>
+
+</div>
+
+<div class="analytics-item">
+
+<span>
+
+Самая большая покупка
+
+</span>
+
+<strong id="largestExpense">
+
+0 ₽
+
+</strong>
+
+</div>
+
+<div class="analytics-item">
+
+<span>
+
+Самый большой доход
+
+</span>
+
+<strong id="largestIncome">
+
+0 ₽
+
+</strong>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ================================= -->
+<!-- CALENDAR PAGE -->
+<!-- ================================= -->
+
+<section
+id="calendarPage"
+class="page">
