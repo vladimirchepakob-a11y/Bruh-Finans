@@ -20,6 +20,7 @@
       <div class="sidebar__logo">
         <span class="sidebar__logo-icon">FP</span>
         <span class="sidebar__logo-text">Finance Pro</span>
+        <button class="sidebar__close" id="sidebarClose" aria-label="Закрыть меню">&times;</button>
       </div>
 
       <nav class="sidebar__nav" id="sidebarNav">
@@ -71,6 +72,8 @@
         </div>
       </div>
     </aside>
+
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
 
     <!-- ===================== ОСНОВНАЯ ОБЛАСТЬ ===================== -->
     <div class="main">
@@ -876,83 +879,12 @@
   <!-- ===================== УВЕДОМЛЕНИЯ / TOASTS ===================== -->
   <div class="toast-container" id="toastContainer" aria-live="polite"></div>
 
-  <!-- ===================== JS-МОДУЛИ (подключим на следующих этапах) ===================== -->
-  <!-- <script src="storage.js"></script> -->
-  <!-- <script src="dashboard.js"></script> -->
-  <!-- <script src="transactions.js"></script> -->
-  <!-- <script src="sidejobs.js"></script> -->
-  <!-- <script src="investments.js"></script> -->
-  <!-- <script src="savings.js"></script> -->
-  <!-- <script src="analytics.js"></script> -->
-  <!-- <script src="calendar.js"></script> -->
-  <!-- <script src="reports.js"></script> -->
-  <!-- <script src="settings.js"></script> -->
-  <!-- <script src="app.js"></script> -->
-
-  <!-- Временная навигация между страницами (без стилей, только каркас) -->
-  <script>
-    (function () {
-      var navLinks = document.querySelectorAll('[data-page]');
-      var pages = document.querySelectorAll('.page');
-      var pageTitle = document.getElementById('pageTitle');
-      var titles = {
-        dashboard: 'Главная',
-        transactions: 'Доходы и расходы',
-        sidejobs: 'Подработки',
-        investments: 'Инвестиции',
-        savings: 'Накопления',
-        analytics: 'Аналитика',
-        calendar: 'Календарь',
-        reports: 'Отчеты',
-        settings: 'Настройки'
-      };
-
-      navLinks.forEach(function (link) {
-        link.addEventListener('click', function (e) {
-          var pageId = link.getAttribute('data-page');
-          if (!pageId || !document.getElementById('page-' + pageId)) return;
-          e.preventDefault();
-
-          pages.forEach(function (p) { p.classList.remove('active'); });
-          document.getElementById('page-' + pageId).classList.add('active');
-
-          document.querySelectorAll('[data-page]').forEach(function (l) {
-            l.classList.toggle('active', l.getAttribute('data-page') === pageId);
-          });
-
-          if (pageTitle && titles[pageId]) pageTitle.textContent = titles[pageId];
-        });
-      });
-
-      var menuToggle = document.getElementById('menuToggle');
-      var sidebar = document.getElementById('sidebar');
-      if (menuToggle && sidebar) {
-        menuToggle.addEventListener('click', function () {
-          sidebar.classList.toggle('sidebar--open');
-        });
-      }
-
-      document.querySelectorAll('[data-close-modal]').forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          document.getElementById('modalOverlay').setAttribute('hidden', '');
-          document.querySelectorAll('.modal').forEach(function (m) { m.setAttribute('hidden', ''); });
-        });
-      });
-
-      function openModal(id) {
-        document.getElementById('modalOverlay').removeAttribute('hidden');
-        document.getElementById(id).removeAttribute('hidden');
-      }
-      document.getElementById('addTransactionBtn') && document.getElementById('addTransactionBtn').addEventListener('click', function () { openModal('modalTransaction'); });
-      document.getElementById('openAddTransactionModal') && document.getElementById('openAddTransactionModal').addEventListener('click', function () { openModal('modalTransaction'); });
-      document.getElementById('bottomAddBtn') && document.getElementById('bottomAddBtn').addEventListener('click', function () { openModal('modalTransaction'); });
-      document.getElementById('openAddSidejobModal') && document.getElementById('openAddSidejobModal').addEventListener('click', function () { openModal('modalSidejob'); });
-      document.getElementById('openAddInvestmentModal') && document.getElementById('openAddInvestmentModal').addEventListener('click', function () { openModal('modalInvestment'); });
-      document.getElementById('openAddAccountModal') && document.getElementById('openAddAccountModal').addEventListener('click', function () { openModal('modalAccount'); });
-      document.getElementById('openAddGoalModal') && document.getElementById('openAddGoalModal').addEventListener('click', function () { openModal('modalGoal'); });
-      document.getElementById('manageCategoriesBtn') && document.getElementById('manageCategoriesBtn').addEventListener('click', function () { openModal('modalCategories'); });
-    })();
-  </script>
+  <!-- ===================== JS-МОДУЛИ ===================== -->
+  <!-- Chart.js — графики на странице «Аналитика» и главном дашборде -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <!-- jsPDF — экспорт отчётов в PDF -->
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+  <script src="app.js"></script>
 
 </body>
 </html>
