@@ -139,3 +139,39 @@ rel="stylesheet">
     <!-- Main -->
 
     <main class="main">
+    <header class="topbar">
+
+    <h1 class="topbar__title">
+        Главная
+    </h1>
+
+    <div class="topbar__actions">
+
+        <button class="topbar__btn">
+            🔔
+        </button>
+
+        <button class="topbar__btn topbar__btn--primary">
+            + Добавить
+        </button>
+
+    </div>
+
+</header>
+
+<div class="content">
+
+    <section class="page active">
+
+        <!-- Здесь будут карточки Главной -->
+
+    </section>
+
+</div>
+
+</main>
+
+</div>
+
+</body>
+</html>
