@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Finance Pro 2.0</title>
+    <title>Финансовый менеджер</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -13,18 +13,18 @@
         <aside class="sidebar">
             <div class="logo">
                 <i data-lucide="wallet"></i>
-                <span>Finance Pro 2.0</span>
+                <span>Финансовый менеджер</span>
             </div>
             <nav class="navigation">
-                <a href="#" class="nav-item active"><i data-lucide="layout-dashboard"></i> Главная</a>
-                <a href="#" class="nav-item"><i data-lucide="arrow-left-right"></i> Операции</a>
-                <a href="#" class="nav-item"><i data-lucide="briefcase"></i> Подработки</a>
-                <a href="#" class="nav-item"><i data-lucide="trending-up"></i> Инвестиции</a>
-                <a href="#" class="nav-item"><i data-lucide="piggy-bank"></i> Накопления</a>
-                <a href="#" class="nav-item"><i data-lucide="pie-chart"></i> Аналитика</a>
-                <a href="#" class="nav-item"><i data-lucide="calendar"></i> Календарь</a>
-                <a href="#" class="nav-item"><i data-lucide="file-text"></i> Отчеты</a>
-                <a href="#" class="nav-item"><i data-lucide="settings"></i> Настройки</a>
+                <a href="#" class="nav-item active" id="nav-main"><i data-lucide="layout-dashboard"></i> Главная</a>
+                <a href="#" class="nav-item" id="nav-operations"><i data-lucide="arrow-left-right"></i> Операции</a>
+                <a href="#" class="nav-item" id="nav-jobs"><i data-lucide="briefcase"></i> Подработки</a>
+                <a href="#" class="nav-item" id="nav-investments"><i data-lucide="trending-up"></i> Инвестиции</a>
+                <a href="#" class="nav-item" id="nav-savings"><i data-lucide="piggy-bank"></i> Накопления</a>
+                <a href="#" class="nav-item" id="nav-analytics"><i data-lucide="pie-chart"></i> Аналитика</a>
+                <a href="#" class="nav-item" id="nav-calendar"><i data-lucide="calendar"></i> Календарь</a>
+                <a href="#" class="nav-item" id="nav-reports"><i data-lucide="file-text"></i> Отчеты</a>
+                <a href="#" class="nav-item" id="nav-settings"><i data-lucide="settings"></i> Настройки</a>
             </nav>
         </aside>
 
@@ -41,66 +41,116 @@
             </header>
 
             <main class="main-content">
-                <div class="dashboard-grid">
-                    
-                    <div class="card balance-card">
-                        <div class="card-header">
-                            <span>Денег всего</span>
-                            <span class="badge status-low">Мало данных</span>
-                        </div>
-                        <div class="card-body">
-                            <h2 class="amount">0,76 ₽</h2>
-                            <div class="mini-chart-placeholder">[График]</div>
-                        </div>
-                    </div>
-
-                    <div class="card health-card">
-                        <div class="card-header">
-                            <span>Финансовое здоровье</span>
-                            <span class="badge status-warning">Можно лучше</span>
-                        </div>
-                        <div class="card-body row-layout">
-                            <div class="health-info">
-                                <h2 class="score">428 <span class="max-score">/ 1000</span></h2>
-                                <p class="recommendation">Рекомендуется увеличить финансовую подушку.</p>
+                
+                <section id="section-main" class="app-section">
+                    <div class="dashboard-grid">
+                        
+                        <div class="card balance-card">
+                            <div class="card-header">
+                                <span>Денег всего</span>
+                                <span class="badge status-low">Мало данных</span>
                             </div>
-                            <div class="progress-ring-wrapper">
-                                <svg class="progress-ring" width="80" height="80">
-                                    <circle class="progress-ring__circle-bg" stroke="#f0f0f0" stroke-width="8" fill="transparent" r="32" cx="40" cy="40"/>
-                                    <circle class="progress-ring__circle" stroke="#ffaa00" stroke-width="8" fill="transparent" r="32" cx="40" cy="40" stroke-dasharray="201.06" stroke-dashoffset="115"/>
-                                </svg>
-                                <span class="ring-text">42%</span>
+                            <div class="card-body">
+                                <h2 class="amount" id="total-balance">0,00 ₽</h2>
+                                <div class="mini-chart-placeholder">Здесь будет график изменений</div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="card income-left-card">
-                        <div class="card-header">
-                            <span>Остаток от дохода</span>
-                            <span class="badge status-warning">Можно лучше</span>
+                        <div class="card health-card">
+                            <div class="card-header">
+                                <span>Финансовое здоровье</span>
+                                <span class="badge status-warning">Можно лучше</span>
+                            </div>
+                            <div class="card-body row-layout">
+                                <div class="health-info">
+                                    <h2 class="score" id="health-score">0 <span class="max-score">/ 100</span></h2>
+                                    <p class="recommendation" id="health-recommendation">Внесите первые данные, чтобы рассчитать показатели здоровья.</p>
+                                </div>
+                                <div class="progress-ring-wrapper">
+                                    <svg class="progress-ring" width="80" height="80">
+                                        <circle class="progress-ring__circle-bg" stroke="#f0f0f0" stroke-width="8" fill="transparent" r="32" cx="40" cy="40"/>
+                                        <circle class="progress-ring__circle" id="health-circle" stroke="#ff9100" stroke-width="8" fill="transparent" r="32" cx="40" cy="40" stroke-dasharray="201.06" stroke-dashoffset="201.06"/>
+                                    </svg>
+                                    <span class="ring-text" id="health-percentage">0%</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="card-body">
-                            <h2 class="amount negative">-13 867 ₽</h2>
+
+                        <div class="card income-left-card">
+                            <div class="card-header">
+                                <span>Остаток от дохода</span>
+                                <span class="badge status-low">0% потрачено</span>
+                            </div>
+                            <div class="card-body">
+                                <h2 class="amount" id="income-left">0,00 ₽</h2>
+                            </div>
+                        </div>
+
+                        <div class="card investment-card">
+                            <div class="card-header">
+                                <span>Переводы в инвестиции</span>
+                                <span class="badge status-normal">Старт</span>
+                            </div>
+                            <div class="card-body">
+                                <h2 class="amount" id="total-investments">0,00 ₽</h2>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+                <section id="section-settings" class="app-section hidden">
+                    <div class="settings-container">
+                        <h2>Настройки приложения</h2>
+                        
+                        <div class="settings-group">
+                            <h3>Управление данными</h3>
+                            <p class="settings-desc">Здесь вы можете управлять локальной базой данных вашего устройства.</p>
+                            
+                            <div class="settings-actions">
+                                <button class="btn btn-secondary" id="btn-export">
+                                    <i data-lucide="download"></i> Экспорт резервной копии
+                                </button>
+                                <button class="btn btn-secondary" id="btn-import">
+                                    <i data-lucide="upload"></i> Импорт данных
+                                </button>
+                                <button class="btn btn-danger" id="btn-delete-data">
+                                    <i data-lucide="trash-2"></i> Удалить все данные
+                                </button>
+                            </div>
                         </div>
                     </div>
+                </section>
 
-                    <div class="card investment-card">
-                        <div class="card-header">
-                            <span>Переводы в инвестиции</span>
-                            <span class="badge status-normal">Это нормально</span>
-                        </div>
-                        <div class="card-body">
-                            <h2 class="amount">0 ₽</h2>
-                        </div>
-                    </div>
-
-                </div>
             </main>
         </div>
     </div>
 
     <script>
+        // Инициализация иконок Lucide
         lucide.createIcons();
+
+        // Простой механизм переключения вкладок для демонстрации структуры
+        const navMain = document.getElementById('nav-main');
+        const navSettings = document.getElementById('nav-settings');
+        const sectionMain = document.getElementById('section-main');
+        const sectionSettings = document.getElementById('section-settings');
+
+        navMain.addEventListener('click', (e) => {
+            e.preventDefault();
+            navSettings.classList.remove('active');
+            navMain.classList.add('active');
+            sectionSettings.classList.add('hidden');
+            sectionMain.classList.remove('hidden');
+        });
+
+        navSettings.addEventListener('click', (e) => {
+            e.preventDefault();
+            navMain.classList.remove('active');
+            navSettings.classList.add('active');
+            sectionMain.classList.add('hidden');
+            sectionSettings.classList.remove('hidden');
+        });
     </script>
     <script src="storage.js"></script>
 </body>
