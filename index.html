@@ -2561,3 +2561,464 @@ id="topIncomeChart">
 <section
 id="calendarPage"
 class="page">
+<!-- ================================= -->
+<!-- CALENDAR PAGE -->
+<!-- ================================= -->
+
+<section
+id="calendarPage"
+class="page">
+
+<div class="page-header">
+
+<div>
+
+<h2>
+Финансовый календарь
+</h2>
+
+<p>
+Все доходы, расходы, инвестиции и подработки по дням
+</p>
+
+</div>
+
+<div class="header-actions">
+
+<input
+type="month"
+id="calendarMonth">
+
+</div>
+
+</div>
+
+<div class="calendar-summary">
+
+<div class="summary-card">
+
+<span>
+Доход
+</span>
+
+<strong
+id="calendarIncome">
+
+0 ₽
+
+</strong>
+
+</div>
+
+<div class="summary-card">
+
+<span>
+Расход
+</span>
+
+<strong
+id="calendarExpense">
+
+0 ₽
+
+</strong>
+
+</div>
+
+<div class="summary-card">
+
+<span>
+Прибыль
+</span>
+
+<strong
+id="calendarProfit">
+
+0 ₽
+
+</strong>
+
+</div>
+
+</div>
+
+<div class="calendar-wrapper">
+
+<div class="calendar-weekdays">
+
+<div>Пн</div>
+<div>Вт</div>
+<div>Ср</div>
+<div>Чт</div>
+<div>Пт</div>
+<div>Сб</div>
+<div>Вс</div>
+
+</div>
+
+<div
+id="calendarGrid"
+class="calendar-grid">
+
+</div>
+
+</div>
+
+<div class="calendar-details">
+
+<h3>
+
+Операции выбранного дня
+
+</h3>
+
+<div
+id="calendarDayInfo">
+
+Выберите день
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ================================= -->
+<!-- REPORTS PAGE -->
+<!-- ================================= -->
+
+<section
+id="reportsPage"
+class="page">
+
+<div class="page-header">
+
+<div>
+
+<h2>
+Отчёты
+</h2>
+
+<p>
+Экспорт финансовых данных и готовые отчёты
+</p>
+
+</div>
+
+</div>
+
+<div class="reports-grid">
+
+<div class="report-card">
+
+<h3>
+
+Отчёт по доходам
+
+</h3>
+
+<p>
+
+Полный список доходов за выбранный период.
+
+</p>
+
+<button
+id="exportIncomeReport"
+class="primary-btn">
+
+Скачать
+
+</button>
+
+</div>
+
+<div class="report-card">
+
+<h3>
+
+Отчёт по расходам
+
+</h3>
+
+<p>
+
+Полная детализация расходов.
+
+</p>
+
+<button
+id="exportExpenseReport"
+class="primary-btn">
+
+Скачать
+
+</button>
+
+</div>
+
+<div class="report-card">
+
+<h3>
+
+Финансовый отчёт
+
+</h3>
+
+<p>
+
+Баланс, прибыль, инвестиции, накопления и аналитика.
+
+</p>
+
+<button
+id="exportFinanceReport"
+class="primary-btn">
+
+Скачать
+
+</button>
+
+</div>
+
+<div class="report-card">
+
+<h3>
+
+JSON Backup
+
+</h3>
+
+<p>
+
+Полная резервная копия всех данных.
+
+</p>
+
+<button
+id="exportJSON"
+class="primary-btn">
+
+Экспорт JSON
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ================================= -->
+<!-- SETTINGS PAGE -->
+<!-- ================================= -->
+
+<section
+id="settingsPage"
+class="page">
+
+<div class="page-header">
+
+<div>
+
+<h2>
+Настройки
+</h2>
+
+<p>
+Настройки приложения и данных
+</p>
+
+</div>
+
+</div>
+
+<div class="settings-grid">
+
+<div class="settings-card">
+
+<h3>
+
+Основные
+
+</h3>
+
+<label>
+
+Валюта
+
+</label>
+
+<select id="currencySelect">
+
+<option value="₽">
+
+Рубль
+
+</option>
+
+<option value="$">
+
+Доллар
+
+</option>
+
+<option value="€">
+
+Евро
+
+</option>
+
+</select>
+
+<label>
+
+Начало недели
+
+</label>
+
+<select id="weekStart">
+
+<option value="1">
+
+Понедельник
+
+</option>
+
+<option value="0">
+
+Воскресенье
+
+</option>
+
+</select>
+
+</div>
+
+<div class="settings-card">
+
+<h3>
+
+Данные
+
+</h3>
+
+<button
+id="backupData"
+class="primary-btn">
+
+Создать резервную копию
+
+</button>
+
+<button
+id="restoreData"
+class="secondary-btn">
+
+Восстановить
+
+</button>
+
+<button
+id="clearAllData"
+class="danger-btn">
+
+Удалить все данные
+
+</button>
+
+</div>
+
+<div class="settings-card">
+
+<h3>
+
+Статистика
+
+</h3>
+
+<div class="setting-line">
+
+<span>
+
+Всего операций
+
+</span>
+
+<strong id="statsTransactions">
+
+0
+
+</strong>
+
+</div>
+
+<div class="setting-line">
+
+<span>
+
+Подработок
+
+</span>
+
+<strong id="statsJobs">
+
+0
+
+</strong>
+
+</div>
+
+<div class="setting-line">
+
+<span>
+
+Инвестиций
+
+</span>
+
+<strong id="statsInvestments">
+
+0
+
+</strong>
+
+</div>
+
+<div class="setting-line">
+
+<span>
+
+Накоплений
+
+</span>
+
+<strong id="statsSavings">
+
+0
+
+</strong>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+</div>
+
+<script src="js/storage.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/calendar.js"></script>
+<script src="js/analytics.js"></script>
+<script src="js/jobs.js"></script>
+<script src="js/investments.js"></script>
+<script src="js/reports.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>
