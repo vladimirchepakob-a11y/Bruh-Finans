@@ -1,98 +1,118 @@
 /*==================================================
-FINANCE PRO
-PART 1
-Reset + Layout + Base
+FINANCE PRO 2.0
+PART 1 / 10
+Foundation
 ==================================================*/
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+/* Google Font */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
 
-:root{
+/* =========================
+RESET
+========================= */
 
-    --primary:#2563eb;
-    --primary2:#3b82f6;
-
-    --bg:#eef4fb;
-
-    --card:#ffffff;
-
-    --text:#1f2937;
-    --text2:#64748b;
-
-    --border:#dbe6f2;
-
-    --radius:22px;
-
-    --shadow:
-        0 12px 30px rgba(15,23,42,.08);
-
-}
-
-*{
+*,
+*::before,
+*::after{
     margin:0;
     padding:0;
     box-sizing:border-box;
 }
 
-html,
-body{
-
-    width:100%;
-    height:100%;
-
+html{
+    scroll-behavior:smooth;
 }
 
 body{
 
     font-family:"Inter",sans-serif;
 
-    background:var(--bg);
+    background:#eef4fb;
 
-    color:var(--text);
+    color:#1f2937;
+
+    min-height:100vh;
 
     overflow:hidden;
 
+    -webkit-font-smoothing:antialiased;
+
 }
 
-/*=========================
+/* =========================
+VARIABLES
+========================= */
+
+:root{
+
+    --primary:#2563eb;
+    --primary2:#3b82f6;
+
+    --success:#10b981;
+
+    --danger:#ef4444;
+
+    --warning:#f59e0b;
+
+    --purple:#7c3aed;
+
+    --text:#1f2937;
+
+    --text2:#64748b;
+
+    --border:#dbe4ef;
+
+    --card:#ffffff;
+
+    --bg:#eef4fb;
+
+    --radius:22px;
+
+    --shadow:
+        0 8px 30px rgba(15,23,42,.07);
+
+    --shadowHover:
+        0 20px 40px rgba(37,99,235,.15);
+
+}
+
+/* =========================
+BACKGROUND
+========================= */
+
+body{
+
+    background:
+
+    radial-gradient(circle at top left,
+    rgba(59,130,246,.10),
+    transparent 35%),
+
+    radial-gradient(circle at bottom right,
+    rgba(124,58,237,.08),
+    transparent 35%),
+
+    var(--bg);
+
+}
+
+/* =========================
 APP
-=========================*/
+========================= */
 
 .app{
 
+    display:flex;
+
     width:100%;
+
     height:100vh;
 
-    display:flex;
-
-    overflow:hidden;
-
 }
 
-/*=========================
-SIDEBAR
-=========================*/
-
-.sidebar{
-
-    width:280px;
-
-    background:#fff;
-
-    border-right:1px solid var(--border);
-
-    display:flex;
-
-    flex-direction:column;
-
-    padding:24px;
-
-    flex-shrink:0;
-
-}
-
-/*=========================
+/* =========================
 MAIN
-=========================*/
+========================= */
 
 .main{
 
@@ -106,41 +126,77 @@ MAIN
 
 }
 
-/*=========================
-BUTTON RESET
-=========================*/
+/* =========================
+CONTENT
+========================= */
+
+.content{
+
+    flex:1;
+
+    overflow:auto;
+
+    padding:32px;
+
+}
+
+/* =========================
+PAGE
+========================= */
+
+.page{
+
+    display:none;
+
+}
+
+.page.active{
+
+    display:block;
+
+}
+
+/* =========================
+LINKS
+========================= */
+
+a{
+
+    text-decoration:none;
+
+    color:inherit;
+
+}
+
+/* =========================
+BUTTON
+========================= */
 
 button{
 
     font-family:inherit;
 
-    border:none;
-
-    background:none;
-
     cursor:pointer;
 
-    appearance:none;
+}
 
-    -webkit-appearance:none;
+/* =========================
+INPUTS
+========================= */
+
+input,
+select,
+textarea{
+
+    font-family:inherit;
+
+    outline:none;
 
 }
 
-/*=========================
-LINK
-=========================*/
-
-a{
-
-    color:inherit;
-
-    text-decoration:none;
-
-}
-
-/*=========================
+/* =========================
 LIST
-=========================*/
+========================= */
 
 ul{
 
@@ -148,13 +204,25 @@ ul{
 
 }
 
-/*=========================
+/* =========================
+TABLE
+========================= */
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+/* =========================
 SCROLLBAR
-=========================*/
+========================= */
 
 ::-webkit-scrollbar{
 
-    width:8px;
+    width:10px;
 
 }
 
@@ -165,122 +233,9 @@ SCROLLBAR
     border-radius:100px;
 
 }
-/*==================================================
-PART 2
-SIDEBAR
-==================================================*/
 
-.sidebar{
-    width:280px;
-    min-width:280px;
-    height:100vh;
-    background:#ffffff;
-    border-right:1px solid #e5e7eb;
-    display:flex;
-    flex-direction:column;
-    padding:24px;
-    flex-shrink:0;
-}
+::-webkit-scrollbar-thumb:hover{
 
-/* ---------- LOGO ---------- */
+    background:#94a3b8;
 
-.sidebar__logo{
-    display:flex;
-    align-items:center;
-    gap:16px;
-    margin-bottom:36px;
-}
-
-.sidebar__logo-icon{
-    width:64px;
-    height:64px;
-    border-radius:18px;
-    background:linear-gradient(135deg,#4f8cff,#2563eb);
-    color:#fff;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:24px;
-    font-weight:700;
-}
-
-.sidebar__logo-text{
-    font-size:28px;
-    font-weight:700;
-    color:#1f2937;
-}
-
-/* ---------- MENU ---------- */
-
-.sidebar__nav{
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-    flex:1;
-}
-
-.nav-item{
-    width:100%;
-    display:flex;
-    align-items:center;
-    gap:14px;
-    padding:14px 18px;
-    border:none;
-    background:transparent;
-    border-radius:16px;
-    cursor:pointer;
-    transition:.25s;
-    font-size:16px;
-    font-weight:600;
-    color:#64748b;
-}
-
-.nav-item:hover{
-    background:#eff6ff;
-    color:#2563eb;
-}
-
-.nav-item.active{
-    background:linear-gradient(135deg,#4f8cff,#2563eb);
-    color:#ffffff;
-}
-
-.nav-icon{
-    width:22px;
-    text-align:center;
-    font-size:18px;
-}
-
-/* ---------- USER ---------- */
-
-.sidebar__footer{
-    margin-top:auto;
-}
-
-.sidebar__user{
-    display:flex;
-    align-items:center;
-    gap:14px;
-    padding:16px;
-    background:#f8fafc;
-    border-radius:18px;
-}
-
-.sidebar__user-avatar{
-    width:56px;
-    height:56px;
-    border-radius:50%;
-    background:linear-gradient(135deg,#60a5fa,#2563eb);
-}
-
-.sidebar__user-name{
-    font-size:18px;
-    font-weight:700;
-    color:#1f2937;
-}
-
-.sidebar__user-currency{
-    margin-top:4px;
-    font-size:14px;
-    color:#64748b;
 }
