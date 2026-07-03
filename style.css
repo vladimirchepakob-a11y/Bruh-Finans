@@ -1,20 +1,12 @@
-/*==================================================
-FINANCE PRO 2.0
-Premium UI
-Part 1 / 10
-Reset + Variables + Layout
-==================================================*/
+/*=========================================
+FINANCE PRO
+PART 1
+RESET + VARIABLES
+=========================================*/
 
-/* Google Font */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
-/*=========================
-RESET
-=========================*/
-
-*,
-*::before,
-*::after{
+*{
     margin:0;
     padding:0;
     box-sizing:border-box;
@@ -22,7 +14,6 @@ RESET
 
 html{
     scroll-behavior:smooth;
-    -webkit-tap-highlight-color:transparent;
 }
 
 body{
@@ -31,184 +22,61 @@ body{
 
     background:#eef3fb;
 
-    color:#1b2430;
-
-    overflow:hidden;
+    color:#1f2937;
 
     min-height:100vh;
+
+    overflow-x:hidden;
 
     -webkit-font-smoothing:antialiased;
 
 }
 
-/*=========================
-ROOT
-=========================*/
-
 :root{
 
-    --primary:#2563eb;
-    --primary-light:#3b82f6;
+    --blue:#2563eb;
+    --blue2:#4f8cff;
 
-    --success:#10b981;
-
-    --danger:#ef4444;
-
-    --warning:#f59e0b;
-
-    --purple:#7c3aed;
-
-    --text:#1f2937;
-
-    --text-light:#6b7280;
-
-    --border:#dde7f3;
+    --bg:#eef3fb;
 
     --card:#ffffff;
 
-    --background:#eef3fb;
+    --text:#1f2937;
+
+    --gray:#6b7280;
+
+    --border:#dce6f4;
 
     --radius:22px;
 
-    --transition:.28s ease;
-
     --shadow:
-        0 10px 30px rgba(15,23,42,.08);
-
-    --shadow-hover:
-        0 20px 45px rgba(37,99,235,.18);
+    0 12px 30px rgba(15,23,42,.08);
 
 }
-
-/*=========================
-BODY BACKGROUND
-=========================*/
 
 body{
 
     background:
 
     radial-gradient(circle at top left,
-    rgba(59,130,246,.12),
+    rgba(37,99,235,.12),
     transparent 30%),
 
     radial-gradient(circle at bottom right,
     rgba(124,58,237,.08),
     transparent 35%),
 
-    var(--background);
+    var(--bg);
 
 }
 
-/*=========================
-APP
-=========================*/
-
-.app{
-
-    display:flex;
-
-    width:100%;
-
-    height:100vh;
-
+/* ничего не скрываем */
+main,
+section,
+article,
+div{
+    position:relative;
 }
-
-/*=========================
-MAIN
-=========================*/
-
-.main{
-
-    flex:1;
-
-    display:flex;
-
-    flex-direction:column;
-
-    overflow:hidden;
-
-}
-
-/*=========================
-CONTENT
-=========================*/
-
-.content{
-
-    flex:1;
-
-    overflow:auto;
-
-    padding:30px;
-
-}
-
-/*=========================
-PAGE
-=========================*/
-
-.page{
-
-    display:none;
-
-}
-
-.page.active{
-
-    display:block;
-
-    animation:pageFade .35s ease;
-
-}
-
-@keyframes pageFade{
-
-    from{
-
-        opacity:0;
-
-        transform:translateY(20px);
-
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:translateY(0);
-
-    }
-
-}
-
-/*=========================
-SCROLLBAR
-=========================*/
-
-::-webkit-scrollbar{
-
-    width:10px;
-
-}
-
-::-webkit-scrollbar-thumb{
-
-    background:#cbd8ea;
-
-    border-radius:100px;
-
-}
-
-::-webkit-scrollbar-thumb:hover{
-
-    background:#aac0df;
-
-}
-
-/*=========================
-BUTTON RESET
-=========================*/
 
 button{
 
@@ -216,46 +84,19 @@ button{
 
 }
 
-button,
-input,
-textarea,
-select{
-
-    outline:none;
-
-}
-
-/*=========================
-LINK
-=========================*/
-
 a{
-
-    text-decoration:none;
 
     color:inherit;
 
-}
-
-/*=========================
-LIST
-=========================*/
-
-ul{
-
-    list-style:none;
+    text-decoration:none;
 
 }
 
-/*=========================
-TABLE
-=========================*/
+img{
 
-table{
+    max-width:100%;
 
-    width:100%;
-
-    border-collapse:collapse;
+    display:block;
 
 }
 /*==================================================
