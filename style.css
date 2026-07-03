@@ -1,102 +1,98 @@
 /*==================================================
- Finance Pro 2.0
- Premium UI
- Part 1 / 10
- Base + Layout
+FINANCE PRO
+PART 1
+Reset + Layout + Base
 ==================================================*/
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
-/*================ RESET ================*/
+:root{
 
-*,
-*::before,
-*::after{
+    --primary:#2563eb;
+    --primary2:#3b82f6;
+
+    --bg:#eef4fb;
+
+    --card:#ffffff;
+
+    --text:#1f2937;
+    --text2:#64748b;
+
+    --border:#dbe6f2;
+
+    --radius:22px;
+
+    --shadow:
+        0 12px 30px rgba(15,23,42,.08);
+
+}
+
+*{
     margin:0;
     padding:0;
     box-sizing:border-box;
 }
 
-html{
-    scroll-behavior:smooth;
-    -webkit-tap-highlight-color:transparent;
+html,
+body{
+
+    width:100%;
+    height:100%;
+
 }
 
 body{
 
-    font-family:'Inter',sans-serif;
+    font-family:"Inter",sans-serif;
 
-    background:#edf3fb;
+    background:var(--bg);
 
-    color:#1f2937;
-
-    min-height:100vh;
+    color:var(--text);
 
     overflow:hidden;
 
-    -webkit-font-smoothing:antialiased;
-
 }
 
-/*================ VARIABLES ================*/
-
-:root{
-
-    --primary:#2563eb;
-    --primary-light:#3b82f6;
-
-    --success:#10b981;
-    --danger:#ef4444;
-    --warning:#f59e0b;
-
-    --text:#1f2937;
-    --text-light:#64748b;
-
-    --border:#dbe5f2;
-
-    --card:#ffffff;
-
-    --background:#edf3fb;
-
-    --radius:22px;
-
-    --shadow:
-    0 10px 30px rgba(15,23,42,.08);
-
-    --shadow-hover:
-    0 18px 45px rgba(37,99,235,.16);
-
-}
-
-/*================ BACKGROUND ================*/
-
-body{
-
-    background:
-
-    radial-gradient(circle at top left,
-    rgba(59,130,246,.12),
-    transparent 30%),
-
-    radial-gradient(circle at bottom right,
-    rgba(124,58,237,.08),
-    transparent 35%),
-
-    var(--background);
-
-}
-
-/*================ LAYOUT ================*/
+/*=========================
+APP
+=========================*/
 
 .app{
 
-    display:flex;
-
     width:100%;
-
     height:100vh;
 
+    display:flex;
+
+    overflow:hidden;
+
 }
+
+/*=========================
+SIDEBAR
+=========================*/
+
+.sidebar{
+
+    width:280px;
+
+    background:#fff;
+
+    border-right:1px solid var(--border);
+
+    display:flex;
+
+    flex-direction:column;
+
+    padding:24px;
+
+    flex-shrink:0;
+
+}
+
+/*=========================
+MAIN
+=========================*/
 
 .main{
 
@@ -110,598 +106,62 @@ body{
 
 }
 
-.content{
-
-    flex:1;
-
-    overflow:auto;
-
-    padding:28px;
-
-}
-
-/*================ PAGE ================*/
-
-.page{
-
-    display:none;
-
-}
-
-.page.active{
-
-    display:block;
-
-    animation:fade .35s ease;
-
-}
-
-@keyframes fade{
-
-from{
-
-opacity:0;
-
-transform:translateY(16px);
-
-}
-
-to{
-
-opacity:1;
-
-transform:none;
-
-}
-
-}
-
-/*================ GRID ================*/
-
-.cards-grid{
-
-display:grid;
-
-gap:22px;
-
-}
-
-.cards-grid--main{
-
-grid-template-columns:
-repeat(auto-fit,minmax(240px,1fr));
-
-}
-
-.cards-grid--stats{
-
-grid-template-columns:
-repeat(auto-fit,minmax(220px,1fr));
-
-}
-
-.cards-grid--analytics{
-
-grid-template-columns:
-repeat(auto-fit,minmax(320px,1fr));
-
-}
-
-.dashboard-row{
-
-display:grid;
-
-grid-template-columns:2fr 1fr;
-
-gap:22px;
-
-margin-top:22px;
-
-}
-
-/*================ DEFAULTS ================*/
+/*=========================
+BUTTON RESET
+=========================*/
 
 button{
 
-font-family:inherit;
+    font-family:inherit;
 
-border:none;
+    border:none;
 
-background:none;
+    background:none;
 
-cursor:pointer;
+    cursor:pointer;
 
-}
+    appearance:none;
 
-input,
-textarea,
-select{
-
-font-family:inherit;
-
-outline:none;
+    -webkit-appearance:none;
 
 }
+
+/*=========================
+LINK
+=========================*/
 
 a{
 
-text-decoration:none;
+    color:inherit;
 
-color:inherit;
+    text-decoration:none;
 
 }
+
+/*=========================
+LIST
+=========================*/
 
 ul{
 
-list-style:none;
+    list-style:none;
 
 }
 
-table{
-
-width:100%;
-
-border-collapse:collapse;
-
-}
-
-/*================ SCROLLBAR ================*/
+/*=========================
+SCROLLBAR
+=========================*/
 
 ::-webkit-scrollbar{
 
-width:10px;
+    width:8px;
 
 }
 
 ::-webkit-scrollbar-thumb{
 
-background:#c5d4ea;
+    background:#cbd5e1;
 
-border-radius:100px;
-
-}
-
-::-webkit-scrollbar-thumb:hover{
-
-background:#a8bedf;
-
-}
-/*==================================================
- Finance Pro 2.0
- Part 2 / 10
- Sidebar + Topbar
-==================================================*/
-
-/*=========================
-SIDEBAR
-=========================*/
-
-.sidebar{
-
-    width:280px;
-
-    background:rgba(255,255,255,.88);
-
-    backdrop-filter:blur(22px);
-
-    border-right:1px solid var(--border);
-
-    display:flex;
-
-    flex-direction:column;
-
-    padding:24px;
-
-    transition:.35s;
-
-    z-index:100;
-
-}
-
-/*=========================
-LOGO
-=========================*/
-
-.sidebar__logo{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:16px;
-
-    margin-bottom:40px;
-
-}
-
-.sidebar__logo-icon{
-
-    width:64px;
-
-    height:64px;
-
-    border-radius:20px;
-
-    background:linear-gradient(135deg,#4f8cff,#2563eb);
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    color:#fff;
-
-    font-size:24px;
-
-    font-weight:800;
-
-    box-shadow:0 15px 35px rgba(37,99,235,.25);
-
-}
-
-.sidebar__logo-text{
-
-    font-size:24px;
-
-    font-weight:800;
-
-    color:var(--text);
-
-}
-
-/*=========================
-NAVIGATION
-=========================*/
-
-.sidebar__nav{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:8px;
-
-    flex:1;
-
-}
-
-.nav-item{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:14px;
-
-    padding:15px 18px;
-
-    border-radius:18px;
-
-    transition:.25s;
-
-    color:var(--text-light);
-
-    font-weight:600;
-
-}
-
-.nav-item:hover{
-
-    background:#eef5ff;
-
-    color:var(--primary);
-
-    transform:translateX(4px);
-
-}
-
-.nav-item.active{
-
-    background:linear-gradient(135deg,#4f8cff,#2563eb);
-
-    color:#fff;
-
-    box-shadow:0 12px 28px rgba(37,99,235,.18);
-
-}
-
-.nav-item__icon{
-
-    width:22px;
-
-    height:22px;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-}
-
-/*=========================
-USER
-=========================*/
-
-.sidebar__footer{
-
-    margin-top:auto;
-
-}
-
-.sidebar__user{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:14px;
-
-    background:#f8fbff;
-
-    padding:16px;
-
-    border-radius:20px;
-
-}
-
-.sidebar__user-avatar{
-
-    width:54px;
-
-    height:54px;
-
-    border-radius:50%;
-
-    background:linear-gradient(135deg,#60a5fa,#2563eb);
-
-}
-
-.sidebar__user-name{
-
-    font-weight:700;
-
-}
-
-.sidebar__user-currency{
-
-    color:var(--text-light);
-
-    margin-top:3px;
-
-    font-size:14px;
-
-}
-
-/*=========================
-TOPBAR
-=========================*/
-
-.topbar{
-
-    height:82px;
-
-    background:rgba(255,255,255,.88);
-
-    backdrop-filter:blur(20px);
-
-    border-bottom:1px solid var(--border);
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    padding:0 28px;
-
-}
-
-.topbar__title{
-
-    font-size:30px;
-
-    font-weight:800;
-
-    color:var(--text);
-
-}
-
-.topbar__actions{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:12px;
-
-}
-
-.topbar__menu-btn,
-
-.topbar__btn--icon{
-
-    width:48px;
-
-    height:48px;
-
-    border-radius:16px;
-
-    background:#fff;
-
-    box-shadow:var(--shadow);
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    transition:.25s;
-
-}
-
-.topbar__menu-btn:hover,
-
-.topbar__btn--icon:hover{
-
-    transform:translateY(-2px);
-
-    box-shadow:var(--shadow-hover);
-
-}
-
-.topbar__btn--primary{
-
-    height:48px;
-
-    padding:0 20px;
-
-    border-radius:16px;
-
-    background:linear-gradient(135deg,#4f8cff,#2563eb);
-
-    color:#fff;
-
-    font-weight:700;
-
-    display:flex;
-
-    align-items:center;
-
-    gap:10px;
-
-    box-shadow:0 14px 35px rgba(37,99,235,.22);
-
-    transition:.25s;
-
-}
-
-.topbar__btn--primary:hover{
-
-    transform:translateY(-2px);
-
-}
-
-/*=========================
-BADGE
-=========================*/
-
-.topbar__btn{
-
-    position:relative;
-
-}
-
-.badge{
-
-    position:absolute;
-
-    top:4px;
-
-    right:4px;
-
-    min-width:18px;
-
-    height:18px;
-
-    border-radius:50px;
-
-    background:#ef4444;
-
-    color:#fff;
-
-    font-size:10px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    font-weight:700;
-
-}
-
-/*=========================
-BOTTOM NAV
-=========================*/
-
-.bottom-nav{
-
-    display:none;
-
-}
-
-/*=========================
-MOBILE
-=========================*/
-
-@media(max-width:900px){
-
-.sidebar{
-
-position:fixed;
-
-left:-100%;
-
-top:0;
-
-height:100%;
-
-box-shadow:0 20px 60px rgba(0,0,0,.18);
-
-}
-
-.sidebar--open{
-
-left:0;
-
-}
-
-.topbar{
-
-padding:0 18px;
-
-}
-
-.topbar__title{
-
-font-size:24px;
-
-}
-
-.bottom-nav{
-
-display:flex;
-
-position:fixed;
-
-left:0;
-
-bottom:0;
-
-width:100%;
-
-height:72px;
-
-background:#fff;
-
-border-top:1px solid var(--border);
-
-justify-content:space-around;
-
-align-items:center;
-
-z-index:500;
-
-}
-
-.content{
-
-padding-bottom:95px;
-
-}
+    border-radius:100px;
 
 }
