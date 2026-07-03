@@ -349,6 +349,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // ПЕРВЫЙ ЗАПУСК
     // ==========================
 
-    render();
+    
+    Dashboard.update();
 
 });
