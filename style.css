@@ -431,23 +431,6 @@ textarea:focus{
 
 }
 
-<div id="balanceCard" class="card"></div>
-
-<div id="incomeCard" class="card"></div>
-
-<div id="expenseCard" class="card"></div>
-
-<div id="financialHealthCard" class="card"></div>
-
-<div id="investmentCard" class="card"></div>
-
-<div id="savingsCard" class="card"></div>
-
-<div id="cashflowChart" class="card"></div>
-
-<div id="balanceChart" class="card"></div>
-
-<div id="recentTransactions" class="card"></div>
 
 /* ==========================================================
    DASHBOARD
