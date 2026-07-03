@@ -43,8 +43,25 @@
             <main class="main-content">
                 
                 <section id="section-main" class="app-section">
+                    
+                    <div class="quick-action-card card" style="margin-bottom: 24px; min-height: auto;">
+                        <div class="card-header">
+                            <span>Быстрая фиксация операции</span>
+                        </div>
+                        <div class="card-body" style="margin-top: 8px;">
+                            <form id="quick-add-form" style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center;">
+                                <input type="number" id="quick-amount" placeholder="Сумма (₽)" required style="padding: 10px; border: 1px solid #eef1f4; border-radius: 8px; flex: 1;">
+                                <select id="quick-type" style="padding: 10px; border: 1px solid #eef1f4; border-radius: 8px; background: white; cursor: pointer;">
+                                    <option value="income">Доход</option>
+                                    <option value="expense">Расход</option>
+                                    <option value="investment">В инвестиции</option>
+                                </select>
+                                <button type="submit" class="btn btn-secondary" style="background-color: var(--color-info); color: white; padding: 10px 20px;">Добавить</button>
+                            </form>
+                        </div>
+                    </div>
+
                     <div class="dashboard-grid">
-                        
                         <div class="card balance-card">
                             <div class="card-header">
                                 <span>Денег всего</span>
@@ -59,7 +76,7 @@
                         <div class="card health-card">
                             <div class="card-header">
                                 <span>Финансовое здоровье</span>
-                                <span class="badge status-warning">Можно лучше</span>
+                                <span class="badge status-low" id="health-badge">Мало данных</span>
                             </div>
                             <div class="card-body row-layout">
                                 <div class="health-info">
@@ -95,7 +112,6 @@
                                 <h2 class="amount" id="total-investments">0,00 ₽</h2>
                             </div>
                         </div>
-
                     </div>
                 </section>
 
@@ -130,7 +146,7 @@
         // Инициализация иконок Lucide
         lucide.createIcons();
 
-        // Простой механизм переключения вкладок для демонстрации структуры
+        // Простой механизм переключения вкладок меню
         const navMain = document.getElementById('nav-main');
         const navSettings = document.getElementById('nav-settings');
         const sectionMain = document.getElementById('section-main');
@@ -152,6 +168,8 @@
             sectionSettings.classList.remove('hidden');
         });
     </script>
+    
     <script src="storage.js"></script>
+    <script src="dashboard.js"></script>
 </body>
 </html>
