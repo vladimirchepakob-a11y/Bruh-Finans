@@ -1,0 +1,504 @@
+/* ==========================================================
+   FINANCE PRO 2.0
+   DESIGN SYSTEM
+========================================================== */
+
+:root{
+
+    --bg:#08111f;
+    --bg2:#101d33;
+    --surface:rgba(18,27,46,.78);
+    --surface2:rgba(27,40,67,.72);
+
+    --primary:#4f8cff;
+    --primary-light:#77a8ff;
+
+    --green:#23d18b;
+    --red:#ff5d73;
+    --orange:#ffb84d;
+
+    --text:#ffffff;
+    --text2:#b8c3d6;
+    --text3:#7f8da8;
+
+    --border:rgba(255,255,255,.07);
+
+    --radius:22px;
+
+    --shadow:
+    0 10px 35px rgba(0,0,0,.35);
+
+    --blur:18px;
+
+}
+
+/* ==========================================================
+RESET
+========================================================== */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+
+font-family:
+Inter,
+Segoe UI,
+Roboto,
+sans-serif;
+
+background:
+radial-gradient(circle at top left,#21498f 0%,transparent 35%),
+radial-gradient(circle at bottom right,#16395f 0%,transparent 40%),
+linear-gradient(145deg,var(--bg),#07101d 65%,#050b16);
+
+color:var(--text);
+
+min-height:100vh;
+
+overflow-x:hidden;
+
+}
+
+/* ==========================================================
+APP
+========================================================== */
+
+.app{
+
+display:flex;
+
+min-height:100vh;
+
+}
+
+/* ==========================================================
+SIDEBAR
+========================================================== */
+
+.sidebar{
+
+width:280px;
+
+background:rgba(10,18,32,.82);
+
+backdrop-filter:blur(var(--blur));
+
+border-right:1px solid var(--border);
+
+display:flex;
+
+flex-direction:column;
+
+padding:24px;
+
+position:sticky;
+
+top:0;
+
+height:100vh;
+
+transition:.35s;
+
+}
+
+/* ==========================================================
+LOGO
+========================================================== */
+
+.sidebar__logo{
+
+display:flex;
+
+align-items:center;
+
+gap:14px;
+
+margin-bottom:40px;
+
+}
+
+.sidebar__logo-icon{
+
+width:48px;
+
+height:48px;
+
+border-radius:16px;
+
+background:linear-gradient(135deg,#4f8cff,#7db0ff);
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-weight:700;
+
+font-size:18px;
+
+box-shadow:0 12px 25px rgba(79,140,255,.45);
+
+}
+
+.sidebar__logo-text{
+
+font-size:22px;
+
+font-weight:700;
+
+}
+
+/* ==========================================================
+NAVIGATION
+========================================================== */
+
+.sidebar__nav{
+
+display:flex;
+
+flex-direction:column;
+
+gap:8px;
+
+}
+
+.nav-item{
+
+display:flex;
+
+align-items:center;
+
+gap:14px;
+
+padding:14px 18px;
+
+border-radius:16px;
+
+color:var(--text2);
+
+text-decoration:none;
+
+transition:.25s;
+
+font-weight:500;
+
+}
+
+.nav-item:hover{
+
+background:rgba(255,255,255,.06);
+
+color:#fff;
+
+transform:translateX(6px);
+
+}
+
+.nav-item.active{
+
+background:linear-gradient(135deg,#4f8cff,#3d78ef);
+
+color:white;
+
+box-shadow:
+0 10px 25px rgba(79,140,255,.35);
+
+}
+
+/* временные иконки */
+
+.nav-item__icon,
+.icon{
+
+width:22px;
+
+height:22px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+}
+
+.nav-item__icon::before,
+.icon::before{
+
+content:"●";
+
+font-size:10px;
+
+}
+
+/* ==========================================================
+USER
+========================================================== */
+
+.sidebar__footer{
+
+margin-top:auto;
+
+}
+
+.sidebar__user{
+
+display:flex;
+
+align-items:center;
+
+gap:12px;
+
+padding:14px;
+
+border-radius:18px;
+
+background:rgba(255,255,255,.05);
+
+}
+
+.sidebar__user-avatar{
+
+width:46px;
+
+height:46px;
+
+border-radius:50%;
+
+background:linear-gradient(135deg,#4f8cff,#8dc2ff);
+
+}
+
+.sidebar__user-name{
+
+display:block;
+
+font-weight:600;
+
+}
+
+.sidebar__user-currency{
+
+font-size:13px;
+
+color:var(--text3);
+
+}
+
+/* ==========================================================
+MAIN
+========================================================== */
+
+.main{
+
+flex:1;
+
+display:flex;
+
+flex-direction:column;
+
+}
+
+/* ==========================================================
+TOPBAR
+========================================================== */
+
+.topbar{
+
+height:84px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:space-between;
+
+padding:0 36px;
+
+background:rgba(10,18,32,.62);
+
+backdrop-filter:blur(18px);
+
+border-bottom:1px solid var(--border);
+
+position:sticky;
+
+top:0;
+
+z-index:100;
+
+}
+
+.topbar__title{
+
+font-size:30px;
+
+font-weight:700;
+
+letter-spacing:.4px;
+
+}
+
+.topbar__actions{
+
+display:flex;
+
+gap:14px;
+
+align-items:center;
+
+}
+
+.topbar__btn{
+
+border:none;
+
+cursor:pointer;
+
+transition:.25s;
+
+}
+
+.topbar__btn--icon{
+
+width:46px;
+
+height:46px;
+
+border-radius:14px;
+
+background:rgba(255,255,255,.05);
+
+color:white;
+
+}
+
+.topbar__btn--icon:hover{
+
+background:rgba(255,255,255,.1);
+
+}
+
+.topbar__btn--primary{
+
+height:46px;
+
+padding:0 22px;
+
+border-radius:14px;
+
+background:linear-gradient(135deg,#4f8cff,#6ea5ff);
+
+color:white;
+
+display:flex;
+
+align-items:center;
+
+gap:10px;
+
+font-weight:600;
+
+box-shadow:
+0 12px 30px rgba(79,140,255,.4);
+
+}
+
+.topbar__btn--primary:hover{
+
+transform:translateY(-2px);
+
+}
+
+/* ==========================================================
+CONTENT
+========================================================== */
+
+.content{
+
+padding:36px;
+
+}
+
+/* ==========================================================
+PAGES
+========================================================== */
+
+.page{
+
+display:none;
+
+animation:fade .4s;
+
+}
+
+.page.active{
+
+display:block;
+
+}
+
+@keyframes fade{
+
+from{
+
+opacity:0;
+
+transform:translateY(18px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:none;
+
+}
+
+}
+
+/* ==========================================================
+MOBILE
+========================================================== */
+
+@media(max-width:960px){
+
+.sidebar{
+
+position:fixed;
+
+left:-100%;
+
+z-index:1000;
+
+}
+
+.sidebar--open{
+
+left:0;
+
+}
+
+.topbar{
+
+padding:0 18px;
+
+}
+
+.content{
+
+padding:20px;
+
+}
+
+}
