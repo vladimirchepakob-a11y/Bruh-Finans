@@ -1,16 +1,33 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
     <title>Finance Pro 2.0</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <link
+        rel="stylesheet"
+        href="style.css">
+
 </head>
 
 <body>
@@ -24,45 +41,74 @@
     <aside class="sidebar">
 
         <div class="logo">
-            <h1>💰 Finance Pro</h1>
+
+            <h1>Finance Pro</h1>
+
         </div>
 
         <nav>
 
-            <button class="nav-btn active" data-page="dashboard">
-                🏠 Главная
+            <button class="nav-btn active"
+                    data-page="dashboard">
+
+                Главная
+
             </button>
 
-            <button class="nav-btn" data-page="transactions">
-                💳 Операции
+            <button class="nav-btn"
+                    data-page="transactions">
+
+                Операции
+
             </button>
 
-            <button class="nav-btn" data-page="sidejobs">
-                💼 Подработки
+            <button class="nav-btn"
+                    data-page="sidejobs">
+
+                Подработки
+
             </button>
 
-            <button class="nav-btn" data-page="investments">
-                📈 Инвестиции
+            <button class="nav-btn"
+                    data-page="investments">
+
+                Инвестиции
+
             </button>
 
-            <button class="nav-btn" data-page="goals">
-                🎯 Цели
+            <button class="nav-btn"
+                    data-page="goals">
+
+                Цели
+
             </button>
 
-            <button class="nav-btn" data-page="analytics">
-                📊 Аналитика
+            <button class="nav-btn"
+                    data-page="analytics">
+
+                Аналитика
+
             </button>
 
-            <button class="nav-btn" data-page="calendar">
-                📅 Календарь
+            <button class="nav-btn"
+                    data-page="calendar">
+
+                Календарь
+
             </button>
 
-            <button class="nav-btn" data-page="reports">
-                📄 Отчеты
+            <button class="nav-btn"
+                    data-page="reports">
+
+                Отчёты
+
             </button>
 
-            <button class="nav-btn" data-page="settings">
-                ⚙ Настройки
+            <button class="nav-btn"
+                    data-page="settings">
+
+                Настройки
+
             </button>
 
         </nav>
@@ -79,10 +125,16 @@
 
             <div>
 
-                <h2>Главная</h2>
+                <h2>
+
+                    Finance Pro
+
+                </h2>
 
                 <p>
-                    Добро пожаловать в Finance Pro 2.0
+
+                    Ваш финансовый помощник
+
                 </p>
 
             </div>
@@ -94,18 +146,25 @@
             </button>
 
         </header>
-
-        <!-- ========================= -->
+                <!-- ========================= -->
         <!-- DASHBOARD -->
         <!-- ========================= -->
 
-        <section id="dashboard" class="page active">
+        <section
+            id="dashboard"
+            class="page active">
 
             <div class="cards">
 
+                <!-- Баланс -->
+
                 <div class="card">
 
-                    <span>Общий баланс</span>
+                    <span>
+
+                        Общий баланс
+
+                    </span>
 
                     <h1 id="balance">
 
@@ -115,9 +174,15 @@
 
                 </div>
 
+                <!-- Доход -->
+
                 <div class="card">
 
-                    <span>Доходы</span>
+                    <span>
+
+                        Доходы
+
+                    </span>
 
                     <h1 id="income">
 
@@ -127,9 +192,15 @@
 
                 </div>
 
+                <!-- Расход -->
+
                 <div class="card">
 
-                    <span>Расходы</span>
+                    <span>
+
+                        Расходы
+
+                    </span>
 
                     <h1 id="expenses">
 
@@ -139,9 +210,15 @@
 
                 </div>
 
+                <!-- Финансовое здоровье -->
+
                 <div class="card">
 
-                    <span>Финансовое здоровье</span>
+                    <span>
+
+                        Финансовое здоровье
+
+                    </span>
 
                     <h1 id="health">
 
@@ -153,13 +230,61 @@
 
             </div>
 
+            <!-- Дополнительная статистика -->
+
+            <div class="cards">
+
+                <div class="card">
+
+                    <span>
+
+                        Финансовая подушка
+
+                    </span>
+
+                    <h2>
+
+                        <span id="safetyDays">
+
+                            ∞
+
+                        </span>
+
+                        дней
+
+                    </h2>
+
+                </div>
+
+                <div class="card">
+
+                    <span>
+
+                        Всего операций
+
+                    </span>
+
+                    <h2 id="operationsCount">
+
+                        0
+
+                    </h2>
+
+                </div>
+
+            </div>
+
             <!-- Последние операции -->
 
             <div class="panel">
 
                 <div class="panel-header">
 
-                    <h3>Последние операции</h3>
+                    <h3>
+
+                        Последние операции
+
+                    </h3>
 
                 </div>
 
@@ -176,16 +301,29 @@
             </div>
 
         </section>
-
-        <!-- ========================= -->
+                <!-- ========================= -->
         <!-- TRANSACTIONS -->
         <!-- ========================= -->
 
-        <section class="page" id="transactions">
+        <section
+            id="transactions"
+            class="page">
 
-            <h2>Все операции</h2>
+            <h2>
 
-            <div id="transactionsList"></div>
+                Все операции
+
+            </h2>
+
+            <div id="transactionsList">
+
+                <div class="empty">
+
+                    Пока операций нет
+
+                </div>
+
+            </div>
 
         </section>
 
@@ -193,11 +331,25 @@
         <!-- SIDE JOBS -->
         <!-- ========================= -->
 
-        <section class="page" id="sidejobs">
+        <section
+            id="sidejobs"
+            class="page">
 
-            <h2>Подработки</h2>
+            <h2>
 
-            <p>Раздел находится в разработке</p>
+                Подработки
+
+            </h2>
+
+            <div class="panel">
+
+                <p>
+
+                    Раздел находится в разработке.
+
+                </p>
+
+            </div>
 
         </section>
 
@@ -205,11 +357,25 @@
         <!-- INVESTMENTS -->
         <!-- ========================= -->
 
-        <section class="page" id="investments">
+        <section
+            id="investments"
+            class="page">
 
-            <h2>Инвестиции</h2>
+            <h2>
 
-            <p>Раздел находится в разработке</p>
+                Инвестиции
+
+            </h2>
+
+            <div class="panel">
+
+                <p>
+
+                    Раздел находится в разработке.
+
+                </p>
+
+            </div>
 
         </section>
 
@@ -217,11 +383,25 @@
         <!-- GOALS -->
         <!-- ========================= -->
 
-        <section class="page" id="goals">
+        <section
+            id="goals"
+            class="page">
 
-            <h2>Финансовые цели</h2>
+            <h2>
 
-            <p>Раздел находится в разработке</p>
+                Финансовые цели
+
+            </h2>
+
+            <div class="panel">
+
+                <p>
+
+                    Раздел находится в разработке.
+
+                </p>
+
+            </div>
 
         </section>
 
@@ -229,9 +409,15 @@
         <!-- ANALYTICS -->
         <!-- ========================= -->
 
-        <section class="page" id="analytics">
+        <section
+            id="analytics"
+            class="page">
 
-            <h2>Аналитика</h2>
+            <h2>
+
+                Аналитика
+
+            </h2>
 
             <div class="chart">
 
@@ -245,9 +431,25 @@
         <!-- CALENDAR -->
         <!-- ========================= -->
 
-        <section class="page" id="calendar">
+        <section
+            id="calendar"
+            class="page">
 
-            <h2>Календарь</h2>
+            <h2>
+
+                Календарь
+
+            </h2>
+
+            <div class="panel">
+
+                <p>
+
+                    Финансовый календарь появится позже.
+
+                </p>
+
+            </div>
 
         </section>
 
@@ -255,9 +457,25 @@
         <!-- REPORTS -->
         <!-- ========================= -->
 
-        <section class="page" id="reports">
+        <section
+            id="reports"
+            class="page">
 
-            <h2>Отчеты</h2>
+            <h2>
+
+                Отчеты
+
+            </h2>
+
+            <div class="panel">
+
+                <p>
+
+                    Генератор отчетов появится позже.
+
+                </p>
+
+            </div>
 
         </section>
 
@@ -265,21 +483,38 @@
         <!-- SETTINGS -->
         <!-- ========================= -->
 
-        <section class="page" id="settings">
+        <section
+            id="settings"
+            class="page">
 
-            <h2>Настройки</h2>
+            <h2>
+
+                Настройки
+
+            </h2>
+
+            <div class="panel">
+
+                <p>
+
+                    Настройки приложения.
+
+                </p>
+
+            </div>
 
         </section>
 
     </main>
 
 </div>
-
 <!-- ================================= -->
-<!-- MODAL -->
+<!-- МОДАЛЬНОЕ ОКНО -->
 <!-- ================================= -->
 
-<div class="modal hidden" id="operationModal">
+<div
+    id="operationModal"
+    class="modal hidden">
 
     <div class="modal-window">
 
@@ -335,7 +570,14 @@
 
 </div>
 
+<!-- ================================= -->
+<!-- JAVASCRIPT -->
+<!-- ================================= -->
+
 <script src="storage.js"></script>
+
+<script src="dashboard.js"></script>
+
 <script src="app.js"></script>
 
 </body>
