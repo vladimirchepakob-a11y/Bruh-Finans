@@ -1,88 +1,257 @@
-/*=========================================
-FINANCE PRO
-PART 1
-RESET + VARIABLES
-=========================================*/
+/*==================================================
+    Finance Pro 2.0
+    Premium UI
+    Part 1.1
+    Base + Reset + Layout
+==================================================*/
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
-*{
+/*=============================
+RESET
+=============================*/
+
+*,
+*::before,
+*::after{
     margin:0;
     padding:0;
     box-sizing:border-box;
 }
 
 html{
+
     scroll-behavior:smooth;
+    -webkit-tap-highlight-color:transparent;
+
 }
 
 body{
 
     font-family:'Inter',sans-serif;
 
-    background:#eef3fb;
-
     color:#1f2937;
+
+    background:#eef3fb;
 
     min-height:100vh;
 
-    overflow-x:hidden;
+    overflow:hidden;
 
     -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
 
 }
+
+/*=============================
+VARIABLES
+=============================*/
 
 :root{
 
-    --blue:#2563eb;
-    --blue2:#4f8cff;
+    --primary:#2563eb;
+    --primary-light:#4f8cff;
 
-    --bg:#eef3fb;
+    --success:#22c55e;
+    --danger:#ef4444;
+    --warning:#f59e0b;
+
+    --background:#eef3fb;
 
     --card:#ffffff;
 
+    --border:#dce7f5;
+
     --text:#1f2937;
 
-    --gray:#6b7280;
-
-    --border:#dce6f4;
+    --text-light:#6b7280;
 
     --radius:22px;
 
+    --transition:.28s ease;
+
     --shadow:
-    0 12px 30px rgba(15,23,42,.08);
+    0 8px 24px rgba(15,23,42,.08);
+
+    --shadow-hover:
+    0 20px 40px rgba(37,99,235,.16);
 
 }
+
+/*=============================
+BACKGROUND
+=============================*/
 
 body{
 
     background:
 
     radial-gradient(circle at top left,
-    rgba(37,99,235,.12),
+    rgba(79,140,255,.12),
     transparent 30%),
 
     radial-gradient(circle at bottom right,
     rgba(124,58,237,.08),
     transparent 35%),
 
-    var(--bg);
+    var(--background);
 
 }
 
-/* ничего не скрываем */
-main,
-section,
-article,
-div{
-    position:relative;
+/*=============================
+APP
+=============================*/
+
+.app{
+
+    display:flex;
+
+    width:100%;
+
+    height:100vh;
+
 }
 
-button{
+/*=============================
+SIDEBAR
+=============================*/
 
-    font-family:inherit;
+.sidebar{
+
+    width:290px;
+
+    flex-shrink:0;
 
 }
+
+/*=============================
+MAIN
+=============================*/
+
+.main{
+
+    flex:1;
+
+    display:flex;
+
+    flex-direction:column;
+
+    min-width:0;
+
+    overflow:hidden;
+
+}
+
+/*=============================
+TOPBAR
+=============================*/
+
+.topbar{
+
+    flex-shrink:0;
+
+}
+
+/*=============================
+CONTENT
+=============================*/
+
+.content{
+
+    flex:1;
+
+    overflow-y:auto;
+
+    overflow-x:hidden;
+
+    padding:28px;
+
+}
+
+/*=============================
+PAGE
+=============================*/
+
+.page{
+
+    display:none;
+
+}
+
+.page.active{
+
+    display:block;
+
+    animation:fade .35s ease;
+
+}
+
+@keyframes fade{
+
+    from{
+
+        opacity:0;
+        transform:translateY(16px);
+
+    }
+
+    to{
+
+        opacity:1;
+        transform:none;
+
+    }
+
+}
+
+/*=============================
+GRID
+=============================*/
+
+.cards-grid{
+
+    display:grid;
+
+    gap:24px;
+
+}
+
+.cards-grid--main{
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(240px,1fr));
+
+}
+
+.cards-grid--stats{
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(210px,1fr));
+
+}
+
+.cards-grid--analytics{
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(320px,1fr));
+
+}
+
+.dashboard-row{
+
+    display:grid;
+
+    grid-template-columns:2fr 1fr;
+
+    gap:24px;
+
+    margin-top:24px;
+
+}
+
+/*=============================
+LINKS
+=============================*/
 
 a{
 
@@ -92,330 +261,82 @@ a{
 
 }
 
-img{
+/*=============================
+LIST
+=============================*/
 
-    max-width:100%;
+ul{
 
-    display:block;
-
-}
-/*==================================================
-FINANCE PRO 2.0
-Part 2 / 10
-Sidebar + Topbar + Navigation
-==================================================*/
-
-/*=========================
-SIDEBAR
-=========================*/
-
-.sidebar{
-    width:280px;
-    background:rgba(255,255,255,.92);
-    backdrop-filter:blur(24px);
-    border-right:1px solid var(--border);
-    display:flex;
-    flex-direction:column;
-    padding:24px;
-    transition:.35s ease;
-    z-index:100;
-}
-
-/*=========================
-LOGO
-=========================*/
-
-.sidebar__logo{
-    display:flex;
-    align-items:center;
-    gap:16px;
-    margin-bottom:40px;
-}
-
-.sidebar__logo-icon{
-    width:72px;
-    height:72px;
-    border-radius:22px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:linear-gradient(135deg,#4f8cff,#2563eb);
-    color:#fff;
-    font-size:30px;
-    font-weight:800;
-    box-shadow:0 20px 40px rgba(37,99,235,.25);
-}
-
-.sidebar__logo-text{
-    font-size:22px;
-    font-weight:800;
-    color:var(--text);
-}
-
-/*=========================
-MENU
-=========================*/
-
-.sidebar__nav{
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-    flex:1;
-}
-
-.nav-item{
-    display:flex;
-    align-items:center;
-    gap:14px;
-    padding:15px 18px;
-    border-radius:18px;
-    color:var(--text-light);
-    font-size:17px;
-    font-weight:600;
-    transition:.25s;
-}
-
-.nav-item:hover{
-    background:#edf4ff;
-    color:var(--primary);
-    transform:translateX(4px);
-}
-
-.nav-item.active{
-    background:linear-gradient(135deg,#4f8cff,#2563eb);
-    color:#fff;
-    box-shadow:0 12px 28px rgba(37,99,235,.22);
-}
-
-.nav-item__icon{
-    width:22px;
-    height:22px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
-
-/*=========================
-USER BLOCK
-=========================*/
-
-.sidebar__footer{
-    margin-top:auto;
-}
-
-.sidebar__user{
-    display:flex;
-    align-items:center;
-    gap:14px;
-    padding:18px;
-    border-radius:20px;
-    background:#f7faff;
-}
-
-.sidebar__user-avatar{
-    width:60px;
-    height:60px;
-    border-radius:50%;
-    background:linear-gradient(135deg,#60a5fa,#2563eb);
-}
-
-.sidebar__user-name{
-    display:block;
-    font-size:17px;
-    font-weight:700;
-}
-
-.sidebar__user-currency{
-    display:block;
-    margin-top:3px;
-    color:var(--text-light);
-}
-
-/*=========================
-TOPBAR
-=========================*/
-
-.topbar{
-    height:82px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 30px;
-    background:rgba(255,255,255,.90);
-    backdrop-filter:blur(18px);
-    border-bottom:1px solid var(--border);
-}
-
-.topbar__title{
-    font-size:30px;
-    font-weight:800;
-}
-
-.topbar__actions{
-    display:flex;
-    align-items:center;
-    gap:12px;
-}
-
-.topbar__menu-btn,
-.topbar__btn--icon{
-    width:48px;
-    height:48px;
-    border:none;
-    border-radius:16px;
-    background:#fff;
-    cursor:pointer;
-    transition:.25s;
-    box-shadow:var(--shadow);
-}
-
-.topbar__menu-btn:hover,
-.topbar__btn--icon:hover{
-    transform:translateY(-2px);
-    box-shadow:var(--shadow-hover);
-}
-
-.topbar__btn--primary{
-    height:48px;
-    border:none;
-    border-radius:16px;
-    padding:0 20px;
-    display:flex;
-    align-items:center;
-    gap:10px;
-    background:linear-gradient(135deg,#4f8cff,#2563eb);
-    color:#fff;
-    cursor:pointer;
-    font-weight:700;
-    transition:.25s;
-}
-
-.topbar__btn--primary:hover{
-    transform:translateY(-2px);
-}
-
-/*=========================
-BADGE
-=========================*/
-
-.badge{
-    position:absolute;
-    top:6px;
-    right:6px;
-    min-width:18px;
-    height:18px;
-    padding:0 5px;
-    border-radius:50px;
-    background:#ef4444;
-    color:#fff;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:10px;
-    font-weight:700;
-}
-
-/*=========================
-BOTTOM NAV
-=========================*/
-
-.bottom-nav{
-    display:none;
-}
-
-/*=========================
-MOBILE
-=========================*/
-
-@media (max-width:900px){
-
-.sidebar{
-
-    position:fixed;
-    top:0;
-    left:-100%;
-    height:100%;
-    width:290px;
-    box-shadow:0 25px 60px rgba(0,0,0,.18);
+    list-style:none;
 
 }
 
-.sidebar.sidebar--open{
+/*=============================
+TABLE
+=============================*/
 
-    left:0;
+table{
 
-}
-
-.topbar{
-
-    padding:0 18px;
-
-}
-
-.topbar__title{
-
-    font-size:24px;
-
-}
-
-.content{
-
-    padding:20px;
-
-}
-
-.bottom-nav{
-
-    position:fixed;
-    left:0;
-    bottom:0;
     width:100%;
-    height:74px;
-    background:#fff;
-    border-top:1px solid var(--border);
-    display:flex;
-    justify-content:space-around;
-    align-items:center;
-    z-index:300;
+
+    border-collapse:collapse;
 
 }
 
-.bottom-nav__item{
+/*=============================
+BUTTONS
+=============================*/
 
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:5px;
-    font-size:12px;
-    color:var(--text-light);
-    font-weight:600;
+button{
 
-}
+    font-family:inherit;
 
-.bottom-nav__item.active{
-
-    color:var(--primary);
-
-}
-
-.bottom-nav__fab{
-
-    width:60px;
-    height:60px;
     border:none;
-    border-radius:50%;
-    background:linear-gradient(135deg,#4f8cff,#2563eb);
-    color:#fff;
-    margin-top:-28px;
-    box-shadow:0 15px 35px rgba(37,99,235,.3);
+
+    outline:none;
+
+    background:none;
+
     cursor:pointer;
 
 }
 
-.content{
+input,
+textarea,
+select{
 
-    padding-bottom:95px;
+    font-family:inherit;
+
+    outline:none;
 
 }
+
+/*=============================
+SCROLLBAR
+=============================*/
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:transparent;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#c8d5ea;
+
+    border-radius:100px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#adc2e4;
 
 }
