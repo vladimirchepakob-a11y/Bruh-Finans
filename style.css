@@ -1,302 +1,260 @@
 /*==================================================
-TOPBAR
+FINANCE PRO 2.0
+Premium UI
+Part 1 / 10
+Reset + Variables + Layout
 ==================================================*/
 
-.topbar{
-    height:82px;
-    padding:0 32px;
+/* Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+/*=========================
+RESET
+=========================*/
+
+*,
+*::before,
+*::after{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+    -webkit-tap-highlight-color:transparent;
+}
+
+body{
+
+    font-family:'Inter',sans-serif;
+
+    background:#eef3fb;
+
+    color:#1b2430;
+
+    overflow:hidden;
+
+    min-height:100vh;
+
+    -webkit-font-smoothing:antialiased;
+
+}
+
+/*=========================
+ROOT
+=========================*/
+
+:root{
+
+    --primary:#2563eb;
+    --primary-light:#3b82f6;
+
+    --success:#10b981;
+
+    --danger:#ef4444;
+
+    --warning:#f59e0b;
+
+    --purple:#7c3aed;
+
+    --text:#1f2937;
+
+    --text-light:#6b7280;
+
+    --border:#dde7f3;
+
+    --card:#ffffff;
+
+    --background:#eef3fb;
+
+    --radius:22px;
+
+    --transition:.28s ease;
+
+    --shadow:
+        0 10px 30px rgba(15,23,42,.08);
+
+    --shadow-hover:
+        0 20px 45px rgba(37,99,235,.18);
+
+}
+
+/*=========================
+BODY BACKGROUND
+=========================*/
+
+body{
+
+    background:
+
+    radial-gradient(circle at top left,
+    rgba(59,130,246,.12),
+    transparent 30%),
+
+    radial-gradient(circle at bottom right,
+    rgba(124,58,237,.08),
+    transparent 35%),
+
+    var(--background);
+
+}
+
+/*=========================
+APP
+=========================*/
+
+.app{
+
     display:flex;
-    align-items:center;
-    justify-content:space-between;
-    background:#ffffffcc;
-    backdrop-filter:blur(18px);
-    border-bottom:1px solid var(--border);
-    position:sticky;
-    top:0;
-    z-index:100;
-}
 
-.topbar__title{
-    font-size:30px;
-    font-weight:800;
-    color:var(--text);
-}
-
-.topbar__actions{
-    display:flex;
-    align-items:center;
-    gap:12px;
-}
-
-.topbar__menu-btn,
-.topbar__btn{
-    border:none;
-    outline:none;
-    cursor:pointer;
-    transition:.25s;
-}
-
-.topbar__menu-btn,
-.topbar__btn--icon{
-    width:48px;
-    height:48px;
-    border-radius:16px;
-    background:#fff;
-    box-shadow:var(--shadow);
-    position:relative;
-}
-
-.topbar__menu-btn:hover,
-.topbar__btn--icon:hover{
-    transform:translateY(-3px);
-    box-shadow:var(--shadow-hover);
-}
-
-.topbar__btn--primary{
-    height:48px;
-    padding:0 20px;
-    border-radius:16px;
-    display:flex;
-    align-items:center;
-    gap:10px;
-    color:#fff;
-    background:linear-gradient(135deg,#3b82f6,#2563eb);
-    box-shadow:0 12px 30px rgba(59,130,246,.25);
-}
-
-.topbar__btn--primary:hover{
-    transform:translateY(-3px);
-}
-
-/*==================================================
-GRID
-==================================================*/
-
-.cards-grid{
-    display:grid;
-    gap:24px;
-}
-
-.cards-grid--main{
-    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-    margin-bottom:24px;
-}
-
-.cards-grid--stats{
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    margin-bottom:24px;
-}
-
-.cards-grid--analytics{
-    grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
-}
-
-.dashboard-row{
-    display:grid;
-    grid-template-columns:2fr 1fr;
-    gap:24px;
-    margin-bottom:24px;
-}
-
-/*==================================================
-CARDS
-==================================================*/
-
-.card{
-    background:#fff;
-    border-radius:24px;
-    padding:24px;
-    border:1px solid #e5edf7;
-    box-shadow:var(--shadow);
-    transition:.3s;
-}
-
-.card:hover{
-    transform:translateY(-5px);
-    box-shadow:var(--shadow-hover);
-}
-
-.card__header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:18px;
-}
-
-.card__label{
-    font-size:13px;
-    font-weight:700;
-    color:var(--text-light);
-    text-transform:uppercase;
-    letter-spacing:.8px;
-}
-
-.card__hint{
-    color:#94a3b8;
-    font-size:13px;
-}
-
-.card__value{
-    font-size:34px;
-    font-weight:800;
-    margin-bottom:10px;
-    color:var(--text);
-}
-
-.card__value--small{
-    font-size:24px;
-}
-
-.card__delta{
-    color:var(--green);
-    font-weight:700;
-}
-
-.card__note{
-    color:var(--text-light);
-    font-size:14px;
-    line-height:1.5;
-}
-
-/*==================================================
-SPECIAL CARDS
-==================================================*/
-
-.card--balance{
-    background:linear-gradient(135deg,#3b82f6,#2563eb);
-    color:#fff;
-}
-
-.card--balance .card__label,
-.card--balance .card__hint,
-.card--balance .card__value,
-.card--balance .card__note{
-    color:#fff;
-}
-
-.card--income{
-    border-left:5px solid #10b981;
-}
-
-.card--expense{
-    border-left:5px solid #ef4444;
-}
-
-.card--investments{
-    border-left:5px solid #8b5cf6;
-}
-
-.card--savings{
-    border-left:5px solid #f59e0b;
-}
-
-.card--health{
-    border-left:5px solid #06b6d4;
-}
-
-.card--wide{
     width:100%;
+
+    height:100vh;
+
 }
 
-/*==================================================
+/*=========================
+MAIN
+=========================*/
+
+.main{
+
+    flex:1;
+
+    display:flex;
+
+    flex-direction:column;
+
+    overflow:hidden;
+
+}
+
+/*=========================
+CONTENT
+=========================*/
+
+.content{
+
+    flex:1;
+
+    overflow:auto;
+
+    padding:30px;
+
+}
+
+/*=========================
+PAGE
+=========================*/
+
+.page{
+
+    display:none;
+
+}
+
+.page.active{
+
+    display:block;
+
+    animation:pageFade .35s ease;
+
+}
+
+@keyframes pageFade{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(20px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/*=========================
+SCROLLBAR
+=========================*/
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#cbd8ea;
+
+    border-radius:100px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#aac0df;
+
+}
+
+/*=========================
+BUTTON RESET
+=========================*/
+
+button{
+
+    font-family:inherit;
+
+}
+
+button,
+input,
+textarea,
+select{
+
+    outline:none;
+
+}
+
+/*=========================
 LINK
-==================================================*/
+=========================*/
 
-.card__link{
-    color:var(--primary);
+a{
+
     text-decoration:none;
-    font-weight:700;
+
+    color:inherit;
+
 }
 
-.card__link:hover{
-    opacity:.8;
+/*=========================
+LIST
+=========================*/
+
+ul{
+
+    list-style:none;
+
 }
 
-/*==================================================
-CHART
-==================================================*/
+/*=========================
+TABLE
+=========================*/
 
-.chart-container{
-    min-height:240px;
-    border-radius:20px;
-    border:2px dashed #dbe6f2;
-    background:#f8fbff;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
+table{
 
-.chart-placeholder{
-    color:#94a3b8;
-}
+    width:100%;
 
-/*==================================================
-RING
-==================================================*/
+    border-collapse:collapse;
 
-.ring-chart{
-    width:170px;
-    height:170px;
-    margin:20px auto;
-    border-radius:50%;
-    background:#edf2f8;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    position:relative;
-}
-
-.ring-chart::before{
-    content:"";
-    position:absolute;
-    width:125px;
-    height:125px;
-    border-radius:50%;
-    background:#fff;
-}
-
-.ring-chart__value,
-.ring-chart__max{
-    position:relative;
-    z-index:2;
-}
-
-.ring-chart__value{
-    font-size:34px;
-    font-weight:800;
-}
-
-.ring-chart__max{
-    margin-left:5px;
-    color:#94a3b8;
-}
-
-.ring-chart--small{
-    width:130px;
-    height:130px;
-}
-
-.ring-chart--small::before{
-    width:95px;
-    height:95px;
-}
-
-/*==================================================
-BADGE
-==================================================*/
-
-.badge{
-    position:absolute;
-    top:4px;
-    right:4px;
-    width:18px;
-    height:18px;
-    border-radius:50%;
-    background:#ef4444;
-    color:#fff;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:10px;
-    font-weight:700;
 }
