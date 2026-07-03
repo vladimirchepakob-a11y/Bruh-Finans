@@ -1,11 +1,11 @@
 /* =========================================================
-   Finance Pro 2.0 — style.css
-   Светлая банковская тема: белый фон, крупные скруглённые
-   карточки, мягкие тени, аккуратная типографика.
-   ========================================================= */
+Finance Pro 2.0 — style.css
+Светлая банковская тема: белый фон, крупные скруглённые
+карточки, мягкие тени, аккуратная типографика.
+========================================================= */
 
 /* ---------- Шрифты ---------- */
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+<span style="color: hsl(var(--primary)); font-weight: 500;">@import</span> url('https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
 
 /* ---------- Токены ---------- */
 :root {
@@ -60,7 +60,7 @@
 }
 
 /* ---------- Reset ---------- */
-* , *::before, *::after { box-sizing: border-box; }
+*, *::before, *::after { box-sizing: border-box; }
 html, body { height: 100%; }
 body {
   margin: 0;
@@ -80,7 +80,7 @@ button { font-family: inherit; cursor: pointer; }
 input, select, textarea { font-family: inherit; }
 ::selection { background: var(--color-primary-soft); color: var(--color-primary-dark); }
 
-@media (prefers-reduced-motion: reduce) {
+<span style="color: hsl(var(--primary)); font-weight: 500;">@media</span> (prefers-reduced-motion: reduce) {
   * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }
 
@@ -252,7 +252,7 @@ input, select, textarea { font-family: inherit; }
 .page { display: none; animation: fade-up var(--transition-base); }
 .page.active { display: block; }
 
-@keyframes fade-up {
+<span style="color: hsl(var(--primary)); font-weight: 500;">@keyframes</span> fade-up {
   from { opacity: 0; transform: translateY(6px); }
   to { opacity: 1; transform: translateY(0); }
 }
@@ -530,7 +530,7 @@ textarea.input { height: auto; padding: 10px 14px; resize: vertical; }
   padding: 20px;
   animation: fade-in var(--transition-base);
 }
-@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+<span style="color: hsl(var(--primary)); font-weight: 500;">@keyframes</span> fade-in { from { opacity: 0; } to { opacity: 1; } }
 
 .modal {
   width: 100%;
@@ -545,7 +545,7 @@ textarea.input { height: auto; padding: 10px 14px; resize: vertical; }
   animation: modal-pop var(--transition-base);
 }
 .modal--small { max-width: 360px; }
-@keyframes modal-pop {
+<span style="color: hsl(var(--primary)); font-weight: 500;">@keyframes</span> modal-pop {
   from { opacity: 0; transform: translateY(12px) scale(0.98); }
   to { opacity: 1; transform: translateY(0) scale(1); }
 }
@@ -585,7 +585,7 @@ textarea.input { height: auto; padding: 10px 14px; resize: vertical; }
   box-shadow: var(--shadow-lg);
   animation: toast-in var(--transition-base);
 }
-@keyframes toast-in {
+<span style="color: hsl(var(--primary)); font-weight: 500;">@keyframes</span> toast-in {
   from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
 }
@@ -626,14 +626,14 @@ textarea.input { height: auto; padding: 10px 14px; resize: vertical; }
 .settings-actions { display: flex; gap: 10px; flex-wrap: wrap; }
 
 /* =========================================================
-   Responsive
-   ========================================================= */
-@media (max-width: 1080px) {
+Responsive
+========================================================= */
+<span style="color: hsl(var(--primary)); font-weight: 500;">@media</span> (max-width: 1080px) {
   .dashboard-row { grid-template-columns: 1fr; }
   .calendar-layout { grid-template-columns: 1fr; }
 }
 
-@media (max-width: 900px) {
+<span style="color: hsl(var(--primary)); font-weight: 500;">@media</span> (max-width: 900px) {
   .sidebar {
     position: fixed;
     left: 0; top: 0;
@@ -649,7 +649,7 @@ textarea.input { height: auto; padding: 10px 14px; resize: vertical; }
   .app { padding-bottom: var(--bottom-nav-height); }
 }
 
-@media (max-width: 560px) {
+<span style="color: hsl(var(--primary)); font-weight: 500;">@media</span> (max-width: 560px) {
   .cards-grid--main, .cards-grid--stats, .cards-grid--analytics { grid-template-columns: 1fr; }
   .card__value { font-size: 26px; }
   .topbar__btn span:not(.icon) { display: none; }
