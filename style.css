@@ -266,3 +266,442 @@ border-radius:100px;
 background:#a8bedf;
 
 }
+/*==================================================
+ Finance Pro 2.0
+ Part 2 / 10
+ Sidebar + Topbar
+==================================================*/
+
+/*=========================
+SIDEBAR
+=========================*/
+
+.sidebar{
+
+    width:280px;
+
+    background:rgba(255,255,255,.88);
+
+    backdrop-filter:blur(22px);
+
+    border-right:1px solid var(--border);
+
+    display:flex;
+
+    flex-direction:column;
+
+    padding:24px;
+
+    transition:.35s;
+
+    z-index:100;
+
+}
+
+/*=========================
+LOGO
+=========================*/
+
+.sidebar__logo{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:16px;
+
+    margin-bottom:40px;
+
+}
+
+.sidebar__logo-icon{
+
+    width:64px;
+
+    height:64px;
+
+    border-radius:20px;
+
+    background:linear-gradient(135deg,#4f8cff,#2563eb);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:#fff;
+
+    font-size:24px;
+
+    font-weight:800;
+
+    box-shadow:0 15px 35px rgba(37,99,235,.25);
+
+}
+
+.sidebar__logo-text{
+
+    font-size:24px;
+
+    font-weight:800;
+
+    color:var(--text);
+
+}
+
+/*=========================
+NAVIGATION
+=========================*/
+
+.sidebar__nav{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:8px;
+
+    flex:1;
+
+}
+
+.nav-item{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    padding:15px 18px;
+
+    border-radius:18px;
+
+    transition:.25s;
+
+    color:var(--text-light);
+
+    font-weight:600;
+
+}
+
+.nav-item:hover{
+
+    background:#eef5ff;
+
+    color:var(--primary);
+
+    transform:translateX(4px);
+
+}
+
+.nav-item.active{
+
+    background:linear-gradient(135deg,#4f8cff,#2563eb);
+
+    color:#fff;
+
+    box-shadow:0 12px 28px rgba(37,99,235,.18);
+
+}
+
+.nav-item__icon{
+
+    width:22px;
+
+    height:22px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+/*=========================
+USER
+=========================*/
+
+.sidebar__footer{
+
+    margin-top:auto;
+
+}
+
+.sidebar__user{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    background:#f8fbff;
+
+    padding:16px;
+
+    border-radius:20px;
+
+}
+
+.sidebar__user-avatar{
+
+    width:54px;
+
+    height:54px;
+
+    border-radius:50%;
+
+    background:linear-gradient(135deg,#60a5fa,#2563eb);
+
+}
+
+.sidebar__user-name{
+
+    font-weight:700;
+
+}
+
+.sidebar__user-currency{
+
+    color:var(--text-light);
+
+    margin-top:3px;
+
+    font-size:14px;
+
+}
+
+/*=========================
+TOPBAR
+=========================*/
+
+.topbar{
+
+    height:82px;
+
+    background:rgba(255,255,255,.88);
+
+    backdrop-filter:blur(20px);
+
+    border-bottom:1px solid var(--border);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:0 28px;
+
+}
+
+.topbar__title{
+
+    font-size:30px;
+
+    font-weight:800;
+
+    color:var(--text);
+
+}
+
+.topbar__actions{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+}
+
+.topbar__menu-btn,
+
+.topbar__btn--icon{
+
+    width:48px;
+
+    height:48px;
+
+    border-radius:16px;
+
+    background:#fff;
+
+    box-shadow:var(--shadow);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    transition:.25s;
+
+}
+
+.topbar__menu-btn:hover,
+
+.topbar__btn--icon:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:var(--shadow-hover);
+
+}
+
+.topbar__btn--primary{
+
+    height:48px;
+
+    padding:0 20px;
+
+    border-radius:16px;
+
+    background:linear-gradient(135deg,#4f8cff,#2563eb);
+
+    color:#fff;
+
+    font-weight:700;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    box-shadow:0 14px 35px rgba(37,99,235,.22);
+
+    transition:.25s;
+
+}
+
+.topbar__btn--primary:hover{
+
+    transform:translateY(-2px);
+
+}
+
+/*=========================
+BADGE
+=========================*/
+
+.topbar__btn{
+
+    position:relative;
+
+}
+
+.badge{
+
+    position:absolute;
+
+    top:4px;
+
+    right:4px;
+
+    min-width:18px;
+
+    height:18px;
+
+    border-radius:50px;
+
+    background:#ef4444;
+
+    color:#fff;
+
+    font-size:10px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-weight:700;
+
+}
+
+/*=========================
+BOTTOM NAV
+=========================*/
+
+.bottom-nav{
+
+    display:none;
+
+}
+
+/*=========================
+MOBILE
+=========================*/
+
+@media(max-width:900px){
+
+.sidebar{
+
+position:fixed;
+
+left:-100%;
+
+top:0;
+
+height:100%;
+
+box-shadow:0 20px 60px rgba(0,0,0,.18);
+
+}
+
+.sidebar--open{
+
+left:0;
+
+}
+
+.topbar{
+
+padding:0 18px;
+
+}
+
+.topbar__title{
+
+font-size:24px;
+
+}
+
+.bottom-nav{
+
+display:flex;
+
+position:fixed;
+
+left:0;
+
+bottom:0;
+
+width:100%;
+
+height:72px;
+
+background:#fff;
+
+border-top:1px solid var(--border);
+
+justify-content:space-around;
+
+align-items:center;
+
+z-index:500;
+
+}
+
+.content{
+
+padding-bottom:95px;
+
+}
+
+}
