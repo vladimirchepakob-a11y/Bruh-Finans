@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance Pro 2.0</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<div id="app">
+
+    <!-- ========================= -->
+    <!-- SIDEBAR -->
+    <!-- ========================= -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <h1>💰 Finance Pro</h1>
+        </div>
+
+        <nav>
+
+            <button class="nav-btn active" data-page="dashboard">
+                🏠 Главная
+            </button>
+
+            <button class="nav-btn" data-page="transactions">
+                💳 Операции
+            </button>
+
+            <button class="nav-btn" data-page="sidejobs">
+                💼 Подработки
+            </button>
+
+            <button class="nav-btn" data-page="investments">
+                📈 Инвестиции
+            </button>
+
+            <button class="nav-btn" data-page="goals">
+                🎯 Цели
+            </button>
+
+            <button class="nav-btn" data-page="analytics">
+                📊 Аналитика
+            </button>
+
+            <button class="nav-btn" data-page="calendar">
+                📅 Календарь
+            </button>
+
+            <button class="nav-btn" data-page="reports">
+                📄 Отчеты
+            </button>
+
+            <button class="nav-btn" data-page="settings">
+                ⚙ Настройки
+            </button>
+
+        </nav>
+
+    </aside>
+
+    <!-- ========================= -->
+    <!-- MAIN -->
+    <!-- ========================= -->
+
+    <main class="main">
+
+        <header class="header">
+
+            <div>
+
+                <h2>Главная</h2>
+
+                <p>
+                    Добро пожаловать в Finance Pro 2.0
+                </p>
+
+            </div>
+
+            <button id="addOperation">
+
+                + Новая операция
+
+            </button>
+
+        </header>
+
+        <!-- ========================= -->
+        <!-- DASHBOARD -->
+        <!-- ========================= -->
+
+        <section id="dashboard" class="page active">
+
+            <div class="cards">
+
+                <div class="card">
+
+                    <span>Общий баланс</span>
+
+                    <h1 id="balance">
+
+                        0 ₽
+
+                    </h1>
+
+                </div>
+
+                <div class="card">
+
+                    <span>Доходы</span>
+
+                    <h1 id="income">
+
+                        0 ₽
+
+                    </h1>
+
+                </div>
+
+                <div class="card">
+
+                    <span>Расходы</span>
+
+                    <h1 id="expenses">
+
+                        0 ₽
+
+                    </h1>
+
+                </div>
+
+                <div class="card">
+
+                    <span>Финансовое здоровье</span>
+
+                    <h1 id="health">
+
+                        100%
+
+                    </h1>
+
+                </div>
+
+            </div>
+
+            <!-- Последние операции -->
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <h3>Последние операции</h3>
+
+                </div>
+
+                <div id="operations">
+
+                    <div class="empty">
+
+                        Пока операций нет
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ========================= -->
+        <!-- TRANSACTIONS -->
+        <!-- ========================= -->
+
+        <section class="page" id="transactions">
+
+            <h2>Все операции</h2>
+
+            <div id="transactionsList"></div>
+
+        </section>
+
+        <!-- ========================= -->
+        <!-- SIDE JOBS -->
+        <!-- ========================= -->
+
+        <section class="page" id="sidejobs">
+
+            <h2>Подработки</h2>
+
+            <p>Раздел находится в разработке</p>
+
+        </section>
+
+        <!-- ========================= -->
+        <!-- INVESTMENTS -->
+        <!-- ========================= -->
+
+        <section class="page" id="investments">
+
+            <h2>Инвестиции</h2>
+
+            <p>Раздел находится в разработке</p>
+
+        </section>
+
+        <!-- ========================= -->
+        <!-- GOALS -->
+        <!-- ========================= -->
+
+        <section class="page" id="goals">
+
+            <h2>Финансовые цели</h2>
+
+            <p>Раздел находится в разработке</p>
+
+        </section>
+
+        <!-- ========================= -->
+        <!-- ANALYTICS -->
+        <!-- ========================= -->
+
+        <section class="page" id="analytics">
+
+            <h2>Аналитика</h2>
+
+            <div class="chart">
+
+                Здесь будут графики
+
+            </div>
+
+        </section>
+
+        <!-- ========================= -->
+        <!-- CALENDAR -->
+        <!-- ========================= -->
+
+        <section class="page" id="calendar">
+
+            <h2>Календарь</h2>
+
+        </section>
+
+        <!-- ========================= -->
+        <!-- REPORTS -->
+        <!-- ========================= -->
+
+        <section class="page" id="reports">
+
+            <h2>Отчеты</h2>
+
+        </section>
+
+        <!-- ========================= -->
+        <!-- SETTINGS -->
+        <!-- ========================= -->
+
+        <section class="page" id="settings">
+
+            <h2>Настройки</h2>
+
+        </section>
+
+    </main>
+
+</div>
+
+<!-- ================================= -->
+<!-- MODAL -->
+<!-- ================================= -->
+
+<div class="modal hidden" id="operationModal">
+
+    <div class="modal-window">
+
+        <h2>
+
+            Новая операция
+
+        </h2>
+
+        <input
+            id="title"
+            type="text"
+            placeholder="Название">
+
+        <input
+            id="amount"
+            type="number"
+            placeholder="Сумма">
+
+        <select id="type">
+
+            <option value="income">
+
+                Доход
+
+            </option>
+
+            <option value="expense">
+
+                Расход
+
+            </option>
+
+        </select>
+
+        <div class="buttons">
+
+            <button id="saveOperation">
+
+                Сохранить
+
+            </button>
+
+            <button id="closeModal">
+
+                Отмена
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="storage.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>
