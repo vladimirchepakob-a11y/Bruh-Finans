@@ -1,0 +1,184 @@
+/**
+ * Модуль управления данными Finance Manager (storage.js)
+ * Отвечает за работу с localStorage, бэкапы и очистку данных.
+ */
+
+// Ключ, под которым данные будут храниться в браузере
+const STORAGE_KEY = 'finance_manager_data';
+
+// Дефолтная пустая структура базы данных (все показатели обнулены)
+const DEFAULT_STORAGE = {
+    balance: 0,
+    incomeLeft: 0,
+    investments: 0,
+    healthScore: 0,
+    operations: [],    // Массив для хранения операций доходов/расходов
+    sideJobs: [],      // Массив для подработок (CRM)
+    investmentList: [],// Детальный учет инвестиций
+    savingsGoals: [],  // Финансовые цели и счета
+    settings: {
+        currency: '₽',
+        tgIntegration: false
+    }
+};
+
+// Переменная для хранения текущего состояния в оперативной памяти
+let appState = null;
+
+/**
+ * Инициализация хранилища при запуске приложения
+ */
+function initStorage() {
+    try {
+        const localData = localStorage.getItem(STORAGE_KEY);
+        if (localData) {
+            appState = JSON.parse(localData);
+        } else {
+            // Если данных нет, создаем чистую базу
+            appState = JSON.parse(JSON.stringify(DEFAULT_STORAGE));
+            saveToLocalStorage();
+        }
+    } catch (error) {
+        console.error("Ошибка при инициализации хранилища:", error);
+        appState = JSON.parse(JSON.stringify(DEFAULT_STORAGE));
+    }
+    
+    // Обновляем интерфейс стартовыми данными (в данном случае нулями)
+    updateUIFromState();
+}
+
+/**
+ * Сохранение текущего состояния в localStorage
+ */
+function saveToLocalStorage() {
+    try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+    } catch (error) {
+        console.error("Не удалось сохранить данные в localStorage:", error);
+        alert("Ошибка сохранения: возможно, закончилось место в браузере.");
+    }
+}
+
+/**
+ * Обновление интерфейса на основе данных из appState
+ */
+function updateUIFromState() {
+    // Обновляем главные карточки
+    document.getElementById('total-balance').textContent = formatCurrency(appState.balance);
+    document.getElementById('income-left').textContent = formatCurrency(appState.incomeLeft);
+    document.getElementById('total-investments').textContent = formatCurrency(appState.investments);
+    
+    // Обновляем Финздоровье
+    document.getElementById('health-score').innerHTML = `${appState.healthScore} <span class="max-score">/ 100</span>`;
+    document.getElementById('health-percentage').textContent = `${appState.healthScore}%`;
+    
+    // Управляем круговым индикатором (SVG)
+    const circle = document.getElementById('health-circle');
+    if (circle) {
+        const radius = circle.r.baseVal.value;
+        const circumference = 2 * Math.PI * radius; // ~201.06
+        const offset = circumference - (appState.healthScore / 100) * circumference;
+        circle.style.strokeDashoffset = offset;
+    }
+}
+
+/**
+ * Вспомогательная функция форматирования валюты
+ */
+function formatCurrency(value) {
+    return new Intl.NumberFormat('ru-RU', {
+        style: 'currency',
+        currency: 'RUB',
+        minimumFractionDigits: 2
+    }).format(value);
+}
+
+/**
+ * ФУНКЦИЯ УДАЛЕНИЯ ДАННЫХ
+ * Полностью стирает базу данных после подтверждения пользователем
+ */
+function clearAllData() {
+    const isConfirmed = confirm("Вы уверены, что хотите полностью удалить все данные? Это действие необратимо.");
+    
+    if (isConfirmed) {
+        try {
+            // Сбрасываем к дефолтным значениям
+            appState = JSON.parse(JSON.stringify(DEFAULT_STORAGE));
+            saveToLocalStorage();
+            updateUIFromState();
+            alert("Все данные успешно удалены.");
+            
+            // Перенаправляем на главную страницу для наглядности
+            document.getElementById('nav-main').click();
+        } catch (error) {
+            console.error("Ошибка при удалении данных:", error);
+            alert("Не удалось очистить данные.");
+        }
+    }
+}
+
+/**
+ * ЭКСПОРТ ДАННЫХ (Резервная копия)
+ * Скачивает JSON файл с данными пользователя
+ */
+function exportData() {
+    try {
+        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appState, null, 4));
+        const downloadAnchor = document.createElement('a');
+        downloadAnchor.setAttribute("href", dataStr);
+        downloadAnchor.setAttribute("download", `finance_manager_backup_${new Date().toISOString().slice(0,10)}.json`);
+        document.body.appendChild(downloadAnchor);
+        downloadAnchor.click();
+        downloadAnchor.remove();
+    } catch (error) {
+        alert("Не удалось экспортировать данные.");
+    }
+}
+
+/**
+ * ИМПОРТ ДАННЫХ
+ * Читает JSON файл и перезаписывает текущую базу данных
+ */
+function importData() {
+    const fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.accept = '.json';
+    
+    fileInput.onchange = e => {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        
+        reader.onload = readerEvent => {
+            try {
+                const parsedData = JSON.parse(readerEvent.target.result);
+                
+                // Минимальная валидация структуры файла
+                if (parsedData.hasOwnProperty('balance') && parsedData.hasOwnProperty('operations')) {
+                    appState = parsedData;
+                    saveToLocalStorage();
+                    updateUIFromState();
+                    alert("Данные успешно импортированы!");
+                } else {
+                    alert("Ошибка: Неверный формат файла резервной копии.");
+                }
+            } catch (error) {
+                alert("Ошибка при чтении файла. Убедитесь, что это корректный JSON.");
+            }
+        };
+        
+        reader.readAsText(file);
+    };
+    
+    fileInput.click();
+}
+
+// Привязка обработчиков к кнопкам после загрузки DOM
+document.addEventListener('DOMContentLoaded', () => {
+    // Инициализируем хранилище
+    initStorage();
+    
+    // Слушатели событий для кнопок в разделе Настройки
+    document.getElementById('btn-delete-data').addEventListener('click', clearAllData);
+    document.getElementById('btn-export').addEventListener('click', exportData);
+    document.getElementById('btn-import').addEventListener('click', importData);
+});
