@@ -4,7 +4,7 @@
     --bg-card: #ffffff;
     --text-main: #1a1d20;
     --text-muted: #8a94a0;
-    --accent: #ffdd00; /* Фирменный желтый оттенок */
+    --accent: #ffdd00;
     --accent-dark: #e6c600;
     
     /* Статусы */
@@ -33,6 +33,11 @@ body {
     overflow-x: hidden;
 }
 
+/* Скрытие неактивных секций */
+.hidden {
+    display: none !important;
+}
+
 /* Макет приложения */
 .app-container {
     display: flex;
@@ -54,7 +59,7 @@ body {
     display: flex;
     align-items: center;
     gap: 12px;
-    font-size: 1.2rem;
+    font-size: 1.15rem;
     font-weight: 700;
     color: var(--text-main);
 }
@@ -157,7 +162,7 @@ body {
     gap: 24px;
 }
 
-/* Стили карточек банковского типа */
+/* Стили карточек */
 .card {
     background-color: var(--bg-card);
     border-radius: var(--radius-xl);
@@ -185,7 +190,18 @@ body {
     font-weight: 500;
 }
 
-/* Теги/Баджи статусов */
+.mini-chart-placeholder {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    background: #f8fafc;
+    border: 1px dashed #e2e8f0;
+    padding: 8px;
+    border-radius: var(--radius-md);
+    margin-top: 12px;
+    text-align: center;
+}
+
+/* Теги статусов */
 .badge {
     padding: 4px 10px;
     border-radius: 20px;
@@ -214,10 +230,6 @@ body {
     letter-spacing: -0.5px;
 }
 
-.amount.negative {
-    color: var(--text-main); /* В банковских UI отрицательный остаток лимита часто оставляют темным или выделяют мягко */
-}
-
 .score {
     font-size: 2rem;
     font-weight: 700;
@@ -234,7 +246,7 @@ body {
     margin-top: 4px;
 }
 
-/* Круговой индикатор (SVG) */
+/* Круговой индикатор */
 .progress-ring-wrapper {
     position: relative;
     display: flex;
@@ -254,40 +266,86 @@ body {
     font-weight: 700;
 }
 
-/* Адаптивность для планшетов и мобильных устройств */
+/* Стили раздела настроек */
+.settings-container {
+    background-color: var(--bg-card);
+    border-radius: var(--radius-xl);
+    padding: 32px;
+    box-shadow: var(--shadow-subtle);
+}
+
+.settings-container h2 {
+    margin-bottom: 24px;
+    font-size: 1.6rem;
+}
+
+.settings-group {
+    border-top: 1px solid #eef1f4;
+    padding-top: 24px;
+}
+
+.settings-group h3 {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+}
+
+.settings-desc {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+.settings-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+/* Кнопки */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border: none;
+    transition: var(--transition);
+}
+
+.btn-secondary {
+    background-color: #f0f2f5;
+    color: var(--text-main);
+}
+
+.btn-secondary:hover {
+    background-color: #e4e7eb;
+}
+
+.btn-danger {
+    background-color: #fee4e2;
+    color: var(--color-danger);
+}
+
+.btn-danger:hover {
+    background-color: #fecdca;
+}
+
+/* Адаптивность */
 @media (max-width: 1024px) {
-    .app-container {
-        flex-direction: column;
-    }
-    .sidebar {
-        width: 100%;
-        border-right: none;
-        border-bottom: 1px solid #eef1f4;
-        padding: 16px 24px;
-    }
-    .navigation {
-        flex-direction: row;
-        overflow-x: auto;
-        padding-bottom: 8px;
-    }
-    .nav-item {
-        white-space: nowrap;
-    }
-    .header {
-        padding: 20px 24px;
-    }
-    .main-content {
-        padding: 24px;
-    }
+    .app-container { flex-direction: column; }
+    .sidebar { width: 100%; border-right: none; border-bottom: 1px solid #eef1f4; padding: 16px 24px; }
+    .navigation { flex-direction: row; overflow-x: auto; padding-bottom: 8px; }
+    .nav-item { white-space: nowrap; }
+    .header { padding: 20px 24px; }
+    .main-content { padding: 24px; }
 }
 
 @media (max-width: 480px) {
-    .header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 16px;
-    }
-    .dashboard-grid {
-        grid-template-columns: 1fr;
-    }
+    .header { flex-direction: column; align-items: flex-start; gap: 16px; }
+    .dashboard-grid { grid-template-columns: 1fr; }
+    .settings-actions { flex-direction: column; width: 100%; }
+    .btn { width: 100%; justify-content: center; }
 }
