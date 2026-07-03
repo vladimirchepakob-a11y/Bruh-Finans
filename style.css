@@ -430,3 +430,371 @@ textarea:focus{
     background:transparent;
 
 }
+
+<div id="balanceCard" class="card"></div>
+
+<div id="incomeCard" class="card"></div>
+
+<div id="expenseCard" class="card"></div>
+
+<div id="financialHealthCard" class="card"></div>
+
+<div id="investmentCard" class="card"></div>
+
+<div id="savingsCard" class="card"></div>
+
+<div id="cashflowChart" class="card"></div>
+
+<div id="balanceChart" class="card"></div>
+
+<div id="recentTransactions" class="card"></div>
+
+/* ==========================================================
+   DASHBOARD
+========================================================== */
+
+/* Баланс */
+
+#balanceCard{
+
+    grid-column:span 6;
+
+    min-height:240px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:space-between;
+
+}
+
+.balance-title{
+
+    font-size:18px;
+
+    color:var(--gray);
+
+}
+
+.balance-value{
+
+    font-size:46px;
+
+    font-weight:700;
+
+    margin-top:15px;
+
+}
+
+.balance-change{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    margin-top:12px;
+
+    color:var(--success);
+
+    font-weight:600;
+
+}
+
+/* Доход */
+
+#incomeCard{
+
+    grid-column:span 3;
+
+    min-height:180px;
+
+}
+
+#incomeCard h3{
+
+    color:var(--gray);
+
+    font-size:16px;
+
+}
+
+.income-value{
+
+    font-size:34px;
+
+    margin-top:20px;
+
+    color:var(--success);
+
+    font-weight:700;
+
+}
+
+/* Расход */
+
+#expenseCard{
+
+    grid-column:span 3;
+
+    min-height:180px;
+
+}
+
+#expenseCard h3{
+
+    color:var(--gray);
+
+    font-size:16px;
+
+}
+
+.expense-value{
+
+    font-size:34px;
+
+    margin-top:20px;
+
+    color:var(--danger);
+
+    font-weight:700;
+
+}
+
+/* Финздоровье */
+
+#financialHealthCard{
+
+    grid-column:span 4;
+
+    min-height:270px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:space-between;
+
+}
+
+.health-circle{
+
+    width:150px;
+
+    height:150px;
+
+    border-radius:50%;
+
+    margin:auto;
+
+    background:
+
+    conic-gradient(
+
+    #32c96a 0deg,
+
+    #32c96a 300deg,
+
+    #ececec 300deg,
+
+    #ececec 360deg
+
+    );
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+}
+
+.health-inner{
+
+    width:120px;
+
+    height:120px;
+
+    background:white;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:36px;
+
+    font-weight:700;
+
+}
+
+.health-text{
+
+    text-align:center;
+
+    font-size:18px;
+
+    margin-top:15px;
+
+}
+
+/* Накопления */
+
+#savingsCard{
+
+    grid-column:span 4;
+
+    min-height:220px;
+
+}
+
+/* Инвестиции */
+
+#investmentCard{
+
+    grid-column:span 4;
+
+    min-height:220px;
+
+}
+
+/* Графики */
+
+#cashflowChart{
+
+    grid-column:span 6;
+
+    min-height:350px;
+
+}
+
+#balanceChart{
+
+    grid-column:span 6;
+
+    min-height:350px;
+
+}
+
+/* Последние операции */
+
+#recentTransactions{
+
+    grid-column:span 12;
+
+    min-height:500px;
+
+}
+
+/* Заголовок карточек */
+
+.card-title{
+
+    font-size:18px;
+
+    color:var(--gray);
+
+    margin-bottom:18px;
+
+}
+
+/* Большие числа */
+
+.big-number{
+
+    font-size:40px;
+
+    font-weight:700;
+
+}
+
+/* Маленькие подписи */
+
+.small-text{
+
+    color:var(--gray);
+
+    font-size:15px;
+
+}
+
+/* Иконка */
+
+.icon-circle{
+
+    width:56px;
+
+    height:56px;
+
+    border-radius:50%;
+
+    background:var(--primaryLight);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:26px;
+
+}
+
+/* Верх карточки */
+
+.card-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+/* Низ карточки */
+
+.card-footer{
+
+    margin-top:20px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+/* Мини статистика */
+
+.stat{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:5px;
+
+}
+
+.stat span:first-child{
+
+    color:var(--gray);
+
+    font-size:14px;
+
+}
+
+.stat span:last-child{
+
+    font-weight:700;
+
+    font-size:22px;
+
+}
