@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Finance Pro 2.0</title>
+
+  <!-- Telegram Mini App SDK -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+  <!-- Стили (будут добавлены на следующем этапе) -->
+  <link rel="stylesheet" href="style.css?v=3">
+</head>
+<body>
+
+  <div class="app" id="app">
+
+    <!-- ===================== СБОКОВОЕ МЕНЮ (DESKTOP) ===================== -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar__logo">
+        <span class="sidebar__logo-icon">FP</span>
+        <span class="sidebar__logo-text">Finance Pro</span>
+        <button class="sidebar__close" id="sidebarClose" aria-label="Закрыть меню">
+          <span class="icon" data-icon="x"></span>
+        </button>
+      </div>
+
+      <nav class="sidebar__nav" id="sidebarNav">
+        <a href="#dashboard" class="nav-item active" data-page="dashboard">
+          <span class="nav-item__icon" data-icon="home"></span>
+          <span class="nav-item__text">Главная</span>
+        </a>
+        <a href="#transactions" class="nav-item" data-page="transactions">
+          <span class="nav-item__icon" data-icon="wallet"></span>
+          <span class="nav-item__text">Доходы и расходы</span>
+        </a>
+        <a href="#sidejobs" class="nav-item" data-page="sidejobs">
+          <span class="nav-item__icon" data-icon="briefcase"></span>
+          <span class="nav-item__text">Подработки</span>
+        </a>
+        <a href="#analytics" class="nav-item" data-page="analytics">
+          <span class="nav-item__icon" data-icon="bar-chart"></span>
+          <span class="nav-item__text">Аналитика</span>
+        </a>
+        <a href="#calendar" class="nav-item" data-page="calendar">
+          <span class="nav-item__icon" data-icon="calendar"></span>
+          <span class="nav-item__text">Календарь</span>
+        </a>
+        <a href="#reports" class="nav-item" data-page="reports">
+          <span class="nav-item__icon" data-icon="file-text"></span>
+          <span class="nav-item__text">Отчеты</span>
+        </a>
+        <a href="#settings" class="nav-item" data-page="settings">
+          <span class="nav-item__icon" data-icon="settings"></span>
+          <span class="nav-item__text">Настройки</span>
+        </a>
+      </nav>
+
+      <div class="sidebar__footer">
+        <div class="sidebar__user">
+          <div class="sidebar__user-avatar" id="userAvatar"></div>
+          <div class="sidebar__user-info">
+            <span class="sidebar__user-name" id="userName">Пользователь</span>
+            <span class="sidebar__user-currency" id="userCurrency">RUB ₽</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Затемнение позади меню на мобильных, клик по нему закрывает меню -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- ===================== ОСНОВНАЯ ОБЛАСТЬ ===================== -->
+    <div class="main">
+
+      <!-- ---------- ВЕРХНЯЯ ПАНЕЛЬ ---------- -->
+      <header class="topbar">
+        <button class="topbar__menu-btn" id="menuToggle" aria-label="Открыть меню">
+          <span class="icon" data-icon="menu"></span>
+        </button>
+
+        <h1 class="topbar__title" id="pageTitle">Главная</h1>
+
+        <div class="topbar__actions">
+          <button class="topbar__btn topbar__btn--icon" id="searchBtn" aria-label="Поиск">
+            <span class="icon" data-icon="search"></span>
+          </button>
+          <button class="topbar__btn topbar__btn--icon" id="notificationsBtn" aria-label="Уведомления">
+            <span class="icon" data-icon="bell"></span>
+            <span class="badge" id="notificationsBadge" hidden>0</span>
+          </button>
+          <button class="topbar__btn topbar__btn--primary" id="addTransactionBtn">
+            <span class="icon" data-icon="plus"></span>
+            <span>Добавить</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- ---------- КОНТЕНТ СТРАНИЦ ---------- -->
+      <main class="content" id="content">
+
+        <!-- ========== СТРАНИЦА: ГЛАВНАЯ / ФИНАНСОВЫЙ ЦЕНТР ========== -->
+        <section class="page active" id="page-dashboard" data-page="dashboard">
+
+          <div class="cards-grid cards-grid--main">
+
+            <article class="card card--balance" id="cardBalance" data-open-chart="balance">
+              <div class="card__header">
+                <span class="card__label">Общий баланс</span>
+                <span class="card__hint" id="balanceHint">Мало данных</span>
+              </div>
+              <div class="card__value" id="totalBalance">0,00 ₽</div>
+              <div class="card__chart"><canvas id="balanceMiniChart" height="46"></canvas></div>
+            </article>
+
+            <article class="card card--income" id="cardIncome" data-open-chart="cashflow">
+              <div class="card__header">
+                <span class="card__label">Доходы за месяц</span>
+              </div>
+              <div class="card__value" id="totalIncome">0,00 ₽</div>
+              <div class="card__delta" id="incomeDelta"></div>
+              <div class="card__chart"><canvas id="incomeMiniChart" height="46"></canvas></div>
+            </article>
+
+            <article class="card card--expense" id="cardExpense" data-open-chart="cashflow">
+              <div class="card__header">
+                <span class="card__label">Расходы за месяц</span>
+              </div>
+              <div class="card__value" id="totalExpense">0,00 ₽</div>
+              <div class="card__delta" id="expenseDelta"></div>
+              <div class="card__chart"><canvas id="expenseMiniChart" height="46"></canvas></div>
+            </article>
+
+            <article class="card card--health">
+              <div class="card__header">
+                <span class="card__label">Финансовое здоровье</span>
+                <span class="card__hint" id="healthHint">Мало данных</span>
+              </div>
+              <div class="card__health-indicator">
+                <div class="ring-chart" id="healthRing" data-value="0">
+                  <span class="ring-chart__value" id="healthScore">0</span>
+                  <span class="ring-chart__max">/ 100</span>
+                </div>
+                <p class="card__health-note" id="healthNote">
+                  Внесите первые данные, чтобы рассчитать показатели здоровья.
+                </p>
+              </div>
+            </article>
+
+          </div>
+
+          <div class="dashboard-row">
+
+            <article class="card card--chart card--wide">
+              <div class="card__header">
+                <span class="card__label">Динамика баланса</span>
+                <div class="card__period-switch" id="balancePeriodSwitch">
+                  <button type="button" class="period-btn" data-period="week">Неделя</button>
+                  <button type="button" class="period-btn active" data-period="month">Месяц</button>
+                  <button type="button" class="period-btn" data-period="year">Год</button>
+                </div>
+              </div>
+              <div class="chart-container chart-container--empty" id="chartBalanceHistory">
+                <canvas id="chartBalanceHistoryCanvas"></canvas>
+                <p class="chart-placeholder" id="chartBalanceHistoryEmpty">Недостаточно данных</p>
+              </div>
+            </article>
+
+            <article class="card card--pillow">
+              <div class="card__header">
+                <span class="card__label">Финансовая подушка безопасности</span>
+              </div>
+              <div class="ring-chart ring-chart--small" id="pillowRing" data-value="0">
+                <span class="ring-chart__value" id="pillowPercent">0%</span>
+              </div>
+              <p class="card__note" id="pillowNote">Остаток от дохода · 0% потрачено</p>
+              <div class="card__value card__value--small" id="pillowMonths">0,00 ₽</div>
+              <p class="card__note" id="pillowMonthsLabel">Хватит на 0 месяцев без дохода</p>
+            </article>
+
+          </div>
+
+          <div class="dashboard-row">
+
+            <article class="card card--wide">
+              <div class="card__header">
+                <span class="card__label">Последние операции</span>
+                <a href="#transactions" class="card__link" data-page-link="transactions">Все операции</a>
+              </div>
+              <div class="table-scroll">
+                <table class="table" id="recentTransactionsTable">
+                  <thead>
+                    <tr>
+                      <th>Категория</th>
+                      <th>Комментарий</th>
+                      <th>Дата</th>
+                      <th class="table__align-right">Сумма</th>
+                    </tr>
+                  </thead>
+                  <tbody id="recentTransactionsBody">
+                    <tr class="table__empty-row">
+                      <td colspan="4">Пока нет операций</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="card__header">
+                <span class="card__label">Подработки за месяц</span>
+                <a href="#sidejobs" class="card__link" data-page-link="sidejobs">Все подработки</a>
+              </div>
+              <div class="card__value" id="sidejobsMonthEarned">0,00 ₽</div>
+              <p class="card__note" id="sidejobsMonthHours">0 ч отработано</p>
+            </article>
+
+          </div>
+
+        </section>
+
+        <!-- ========== СТРАНИЦА: ДОХОДЫ И РАСХОДЫ ========== -->
+        <section class="page" id="page-transactions" data-page="transactions">
+
+          <div class="page-toolbar">
+            <div class="page-toolbar__filters">
+              <select class="select" id="filterType">
+                <option value="all">Все операции</option>
+                <option value="income">Доходы</option>
+                <option value="expense">Расходы</option>
+              </select>
+              <select class="select" id="filterCategory">
+                <option value="all">Все категории</option>
+              </select>
+              <input type="text" class="input" id="filterSearch" placeholder="Поиск по операциям">
+              <input type="date" class="input" id="filterDateFrom">
+              <input type="date" class="input" id="filterDateTo">
+            </div>
+            <div class="page-toolbar__actions">
+              <button class="btn btn--secondary" id="manageCategoriesBtn">Категории</button>
+              <button class="btn btn--primary" id="openAddTransactionModal">+ Новая операция</button>
+            </div>
+          </div>
+
+          <article class="card">
+            <div class="table-scroll">
+              <table class="table" id="transactionsTable">
+                <thead>
+                  <tr>
+                    <th>Дата</th>
+                    <th>Категория</th>
+                    <th>Подкатегория</th>
+                    <th>Комментарий</th>
+                    <th>Способ оплаты</th>
+                    <th class="table__align-right">Сумма</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="transactionsBody">
+                  <tr class="table__empty-row">
+                    <td colspan="7">Операций пока нет — добавьте первую запись</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+
+        </section>
+
+        <!-- ========== СТРАНИЦА: ПОДРАБОТКИ ========== -->
+        <section class="page" id="page-sidejobs" data-page="sidejobs">
+
+          <div class="cards-grid cards-grid--stats">
+            <article class="card card--stat">
+              <span class="card__label">Общий заработок</span>
+              <div class="card__value" id="sidejobsTotalEarned">0,00 ₽</div>
+            </article>
+            <article class="card card--stat">
+              <span class="card__label">Отработано часов</span>
+              <div class="card__value" id="sidejobsTotalHours">0</div>
+            </article>
+            <article class="card card--stat">
+              <span class="card__label">Средняя ставка</span>
+              <div class="card__value" id="sidejobsAvgRate">0,00 ₽/ч</div>
+            </article>
+            <article class="card card--stat">
+              <span class="card__label">Лучший месяц</span>
+              <div class="card__value" id="sidejobsBestMonth">—</div>
+            </article>
+          </div>
+
+          <div class="page-toolbar">
+            <div class="page-toolbar__filters">
+              <select class="select" id="sidejobsFilterStatus">
+                <option value="all">Все статусы</option>
+                <option value="paid">Оплачено</option>
+                <option value="pending">Ожидает оплаты</option>
+              </select>
+            </div>
+            <div class="page-toolbar__actions">
+              <button class="btn btn--primary" id="openAddSidejobModal">+ Новая подработка</button>
+            </div>
+          </div>
+
+          <article class="card">
+            <div class="table-scroll">
+              <table class="table" id="sidejobsTable">
+                <thead>
+                  <tr>
+                    <th>Работа</th>
+                    <th>Заказчик</th>
+                    <th>Дата</th>
+                    <th>Часы</th>
+                    <th>Ставка</th>
+                    <th class="table__align-right">Сумма</th>
+                    <th>Статус</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="sidejobsBody">
+                  <tr class="table__empty-row">
+                    <td colspan="8">Подработок пока нет</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+
+        </section>
+
+        <!-- ========== СТРАНИЦА: АНАЛИТИКА ========== -->
+        <section class="page" id="page-analytics" data-page="analytics">
+
+          <div class="page-toolbar">
+            <div class="page-toolbar__filters">
+              <select class="select" id="analyticsMonth"></select>
+              <select class="select" id="analyticsPeriod">
+                <option value="month">Этот месяц</option>
+                <option value="quarter">Квартал</option>
+                <option value="year">Год</option>
+                <option value="all">Всё время</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="cards-grid cards-grid--analytics" id="analyticsGrid">
+            <article class="card card--chart"><div class="card__header"><span class="card__label">Динамика доходов</span></div><div class="chart-container chart-container--empty" id="chartIncomeDynamics"><canvas></canvas><p class="chart-placeholder">Недостаточно данных</p></div></article>
+            <article class="card card--chart"><div class="card__header"><span class="card__label">Динамика расходов</span></div><div class="chart-container chart-container--empty" id="chartExpenseDynamics"><canvas></canvas><p class="chart-placeholder">Недостаточно данных</p></div></article>
+            <article class="card card--chart"><div class="card__header"><span class="card__label">Изменение баланса</span></div><div class="chart-container chart-container--empty" id="chartBalanceChange"><canvas></canvas><p class="chart-placeholder">Недостаточно данных</p></div></article>
+            <article class="card card--chart"><div class="card__header"><span class="card__label">Денежный поток</span></div><div class="chart-container chart-container--empty" id="chartCashFlow"><canvas></canvas><p class="chart-placeholder">Недостаточно данных</p></div></article>
+            <article class="card card--chart"><div class="card__header"><span class="card__label">Структура расходов по категориям</span></div><div class="chart-container chart-container--empty" id="chartExpenseByCategory"><canvas></canvas><p class="chart-placeholder">Недостаточно данных</p></div></article>
+            <article class="card card--chart"><div class="card__header"><span class="card__label">Распределение доходов</span></div><div class="chart-container chart-container--empty" id="chartIncomeDistribution"><canvas></canvas><p class="chart-placeholder">Недостаточно данных</p></div></article>
+            <article class="card card--chart"><div class="card__header"><span class="card__label">Средний чек</span></div><div class="chart-container chart-container--empty" id="chartAvgCheck"><canvas></canvas><p class="chart-placeholder">Недостаточно данных</p></div></article>
+            <article class="card card--chart"><div class="card__header"><span class="card__label">Средний доход / расход по месяцам</span></div><div class="chart-container chart-container--empty" id="chartAvgIncomeExpense"><canvas></canvas><p class="chart-placeholder">Недостаточно данных</p></div></article>
+            <article class="card card--chart"><div class="card__header"><span class="card__label">Финансовая подушка</span></div><div class="chart-container chart-container--empty" id="chartPillowDynamics"><canvas></canvas><p class="chart-placeholder">Недостаточно данных</p></div></article>
+            <article class="card card--chart"><div class="card__header"><span class="card__label">Заработок по подработкам</span></div><div class="chart-container chart-container--empty" id="chartSidejobsProfit"><canvas></canvas><p class="chart-placeholder">Недостаточно данных</p></div></article>
+            <article class="card card--chart"><div class="card__header"><span class="card__label">Сравнение месяцев</span></div><div class="chart-container chart-container--empty" id="chartMonthComparison"><canvas></canvas><p class="chart-placeholder">Недостаточно данных</p></div></article>
+            <article class="card card--chart"><div class="card__header"><span class="card__label">Сравнение годов</span></div><div class="chart-container chart-container--empty" id="chartYearComparison"><canvas></canvas><p class="chart-placeholder">Недостаточно данных</p></div></article>
+            <article class="card card--chart"><div class="card__header"><span class="card__label">Прогноз баланса</span></div><div class="chart-container chart-container--empty" id="chartBalanceForecast"><canvas></canvas><p class="chart-placeholder">Недостаточно данных</p></div></article>
+          </div>
+
+        </section>
+
+        <!-- ========== СТРАНИЦА: КАЛЕНДАРЬ ========== -->
+        <section class="page" id="page-calendar" data-page="calendar">
+
+          <div class="calendar-layout">
+
+            <article class="card card--wide">
+              <div class="card__header">
+                <div class="calendar-nav">
+                  <button class="icon-btn" id="calendarPrevMonth" aria-label="Предыдущий месяц">‹</button>
+                  <span class="calendar-nav__title" id="calendarMonthLabel">Месяц Год</span>
+                  <button class="icon-btn" id="calendarNextMonth" aria-label="Следующий месяц">›</button>
+                </div>
+              </div>
+              <div class="calendar-grid" id="calendarGrid">
+                <!-- дни календаря рендерятся JS-ом -->
+              </div>
+            </article>
+
+            <article class="card" id="calendarDayDetails">
+              <div class="card__header">
+                <span class="card__label" id="calendarSelectedDate">Выберите день</span>
+              </div>
+              <div class="calendar-day-stats" id="calendarDayStats">
+                <p class="empty-state">Нет данных за выбранный день</p>
+              </div>
+              <ul class="list" id="calendarDayEvents"></ul>
+            </article>
+
+          </div>
+
+        </section>
+
+        <!-- ========== СТРАНИЦА: ОТЧЕТЫ ========== -->
+        <section class="page" id="page-reports" data-page="reports">
+
+          <article class="card">
+            <div class="card__header">
+              <span class="card__label">Параметры отчета</span>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="reportDateFrom">С</label>
+                <input type="date" class="input" id="reportDateFrom">
+              </div>
+              <div class="form-group">
+                <label for="reportDateTo">По</label>
+                <input type="date" class="input" id="reportDateTo">
+              </div>
+              <div class="form-group">
+                <label for="reportType">Тип отчета</label>
+                <select class="select" id="reportType">
+                  <option value="full">Полный отчет</option>
+                  <option value="income">Только доходы</option>
+                  <option value="expense">Только расходы</option>
+                  <option value="sidejobs">Подработки</option>
+                </select>
+              </div>
+              <button class="btn btn--primary" id="generateReportBtn">Сформировать отчет</button>
+            </div>
+          </article>
+
+          <article class="card" id="reportPreview">
+            <div class="card__header">
+              <span class="card__label">Предпросмотр отчета</span>
+              <div class="report-export-actions">
+                <button class="btn btn--secondary" id="exportReportPdf">PDF</button>
+                <button class="btn btn--secondary" id="exportReportCsv">CSV</button>
+                <button class="btn btn--secondary" id="exportReportJson">JSON</button>
+              </div>
+            </div>
+            <p class="empty-state" id="reportEmptyState">Сформируйте отчет, чтобы увидеть предпросмотр</p>
+            <div id="reportContent" hidden></div>
+          </article>
+
+        </section>
+
+        <!-- ========== СТРАНИЦА: НАСТРОЙКИ ========== -->
+        <section class="page" id="page-settings" data-page="settings">
+
+          <div class="section-block">
+            <h2 class="section-block__title">Общие настройки</h2>
+            <article class="card">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="settingsCurrency">Валюта приложения</label>
+                  <select class="select" id="settingsCurrency">
+                    <option value="RUB">Российский рубль (₽)</option>
+                    <option value="USD">Доллар США ($)</option>
+                    <option value="EUR">Евро (€)</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="settingsTheme">Тема оформления</label>
+                  <select class="select" id="settingsTheme">
+                    <option value="light">Светлая</option>
+                    <option value="dark" disabled>Тёмная (скоро)</option>
+                  </select>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="section-block">
+            <h2 class="section-block__title">Управление данными</h2>
+            <article class="card">
+              <p class="card__note">Здесь вы можете управлять локальной базой данных вашего устройства.</p>
+              <div class="settings-actions">
+                <button class="btn btn--secondary" id="exportBackupBtn">
+                  <span class="icon" data-icon="download"></span>
+                  Экспорт резервной копии
+                </button>
+                <button class="btn btn--secondary" id="importDataBtn">
+                  <span class="icon" data-icon="upload"></span>
+                  Импорт данных
+                </button>
+                <button class="btn btn--danger" id="clearAllDataBtn">
+                  <span class="icon" data-icon="trash"></span>
+                  Удалить все данные
+                </button>
+              </div>
+              <input type="file" id="importFileInput" accept="application/json" hidden>
+            </article>
+          </div>
+
+          <div class="section-block">
+            <h2 class="section-block__title">Telegram Mini App</h2>
+            <article class="card">
+              <div class="form-row">
+                <label class="checkbox">
+                  <input type="checkbox" id="settingsTelegramHaptics">
+                  Тактильная отдача (haptics)
+                </label>
+                <label class="checkbox">
+                  <input type="checkbox" id="settingsTelegramTheme" checked>
+                  Использовать цветовую тему Telegram
+                </label>
+              </div>
+            </article>
+          </div>
+
+        </section>
+
+      </main>
+    </div>
+
+    <!-- ===================== НИЖНЕЕ МЕНЮ (MOBILE) ===================== -->
+    <nav class="bottom-nav" id="bottomNav">
+      <a href="#dashboard" class="bottom-nav__item active" data-page="dashboard">
+        <span class="icon" data-icon="home"></span>
+        <span>Главная</span>
+      </a>
+      <a href="#transactions" class="bottom-nav__item" data-page="transactions">
+        <span class="icon" data-icon="wallet"></span>
+        <span>Операции</span>
+      </a>
+      <button class="bottom-nav__fab" id="bottomAddBtn" aria-label="Добавить операцию">
+        <span class="icon" data-icon="plus"></span>
+      </button>
+      <a href="#analytics" class="bottom-nav__item" data-page="analytics">
+        <span class="icon" data-icon="bar-chart"></span>
+        <span>Аналитика</span>
+      </a>
+      <a href="#settings" class="bottom-nav__item" data-page="settings">
+        <span class="icon" data-icon="settings"></span>
+        <span>Настройки</span>
+      </a>
+    </nav>
+
+  </div>
+
+  <!-- ===================== МОДАЛЬНЫЕ ОКНА ===================== -->
+  <div class="modal-overlay" id="modalOverlay" hidden>
+
+    <!-- Модалка: добавить/редактировать операцию -->
+    <div class="modal" id="modalTransaction" hidden>
+      <div class="modal__header">
+        <h3 class="modal__title" id="modalTransactionTitle">Новая операция</h3>
+        <button class="modal__close" data-close-modal aria-label="Закрыть">&times;</button>
+      </div>
+      <form class="modal__body" id="formTransaction">
+        <div class="segmented-control" id="transactionTypeSwitch">
+          <button type="button" class="segmented-control__item active" data-type="expense">Расход</button>
+          <button type="button" class="segmented-control__item" data-type="income">Доход</button>
+        </div>
+        <div class="form-group">
+          <label for="transactionAmount">Сумма</label>
+          <input type="number" step="0.01" class="input" id="transactionAmount" required>
+        </div>
+        <div class="form-group">
+          <label for="transactionCategory">Категория</label>
+          <select class="select" id="transactionCategory"></select>
+        </div>
+        <div class="form-group">
+          <label for="transactionSubcategory">Подкатегория</label>
+          <input type="text" class="input" id="transactionSubcategory" placeholder="Необязательно">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="transactionDate">Дата</label>
+            <input type="date" class="input" id="transactionDate" required>
+          </div>
+          <div class="form-group">
+            <label for="transactionTime">Время</label>
+            <input type="time" class="input" id="transactionTime">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="transactionPaymentMethod">Способ оплаты</label>
+          <select class="select" id="transactionPaymentMethod">
+            <option value="cash">Наличные</option>
+            <option value="card">Карта</option>
+            <option value="transfer">Перевод</option>
+            <option value="other">Другое</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="transactionComment">Комментарий</label>
+          <textarea class="input" id="transactionComment" rows="2"></textarea>
+        </div>
+      </form>
+      <div class="modal__footer">
+        <button class="btn btn--secondary" data-close-modal>Отмена</button>
+        <button class="btn btn--primary" id="saveTransactionBtn" form="formTransaction" type="submit">Сохранить</button>
+      </div>
+    </div>
+
+    <!-- Модалка: добавить/редактировать подработку -->
+    <div class="modal" id="modalSidejob" hidden>
+      <div class="modal__header">
+        <h3 class="modal__title" id="modalSidejobTitle">Новая подработка</h3>
+        <button class="modal__close" data-close-modal aria-label="Закрыть">&times;</button>
+      </div>
+      <form class="modal__body" id="formSidejob">
+        <div class="form-group">
+          <label for="sidejobTitle">Название работы</label>
+          <input type="text" class="input" id="sidejobTitle" required>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="sidejobClient">Заказчик</label>
+            <input type="text" class="input" id="sidejobClient">
+          </div>
+          <div class="form-group">
+            <label for="sidejobCompany">Компания</label>
+            <input type="text" class="input" id="sidejobCompany">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="sidejobDate">Дата выполнения</label>
+          <input type="date" class="input" id="sidejobDate" required>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="sidejobTimeStart">Начало</label>
+            <input type="time" class="input" id="sidejobTimeStart">
+          </div>
+          <div class="form-group">
+            <label for="sidejobTimeEnd">Окончание</label>
+            <input type="time" class="input" id="sidejobTimeEnd">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="sidejobAmount">Заработанная сумма</label>
+          <input type="number" step="0.01" class="input" id="sidejobAmount" required>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="sidejobHours">Часы (авто)</label>
+            <input type="text" class="input input--readonly" id="sidejobHours" readonly placeholder="—">
+          </div>
+          <div class="form-group">
+            <label for="sidejobRate">Ставка в час (авто)</label>
+            <input type="text" class="input input--readonly" id="sidejobRate" readonly placeholder="—">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="sidejobStatus">Статус оплаты</label>
+          <select class="select" id="sidejobStatus">
+            <option value="pending">Ожидает оплаты</option>
+            <option value="paid">Оплачено</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="sidejobComment">Комментарий</label>
+          <textarea class="input" id="sidejobComment" rows="2"></textarea>
+        </div>
+      </form>
+      <div class="modal__footer">
+        <button class="btn btn--secondary" data-close-modal>Отмена</button>
+        <button class="btn btn--primary" form="formSidejob" type="submit">Сохранить</button>
+      </div>
+    </div>
+
+    <!-- Модалка: управление категориями -->
+    <div class="modal" id="modalCategories" hidden>
+      <div class="modal__header">
+        <h3 class="modal__title">Категории</h3>
+        <button class="modal__close" data-close-modal aria-label="Закрыть">&times;</button>
+      </div>
+      <div class="modal__body">
+        <div class="form-row">
+          <input type="text" class="input" id="newCategoryName" placeholder="Название новой категории">
+          <select class="select" id="newCategoryType">
+            <option value="expense">Расход</option>
+            <option value="income">Доход</option>
+          </select>
+          <button class="btn btn--primary" id="addCategoryBtn">Добавить</button>
+        </div>
+        <ul class="list" id="categoriesList"></ul>
+      </div>
+      <div class="modal__footer">
+        <button class="btn btn--secondary" data-close-modal>Готово</button>
+      </div>
+    </div>
+
+    <!-- Модалка: подтверждение удаления -->
+    <div class="modal modal--small" id="modalConfirm" hidden>
+      <div class="modal__header">
+        <h3 class="modal__title" id="modalConfirmTitle">Подтвердите действие</h3>
+        <button class="modal__close" data-close-modal aria-label="Закрыть">&times;</button>
+      </div>
+      <div class="modal__body">
+        <p id="modalConfirmText">Это действие нельзя отменить. Продолжить?</p>
+      </div>
+      <div class="modal__footer">
+        <button class="btn btn--secondary" data-close-modal>Отмена</button>
+        <button class="btn btn--danger" id="modalConfirmActionBtn">Удалить</button>
+      </div>
+    </div>
+
+    <!-- Модалка: подробный график баланса ("Денег всего") -->
+    <div class="modal modal--chart-detail" id="modalBalanceDetail" hidden>
+      <div class="modal__header">
+        <button class="modal__close-text" data-close-modal>Закрыть</button>
+        <h3 class="modal__title">Денег всего</h3>
+        <span style="width:56px"></span>
+      </div>
+      <div class="modal__body">
+        <div class="chart-detail__value" id="chartDetailBalanceValue">0,00 ₽</div>
+        <div class="card__period-switch" id="detailBalancePeriodSwitch">
+          <button type="button" class="period-btn" data-period="week">Неделя</button>
+          <button type="button" class="period-btn active" data-period="month">Месяц</button>
+          <button type="button" class="period-btn" data-period="year">Год</button>
+        </div>
+        <div class="chart-detail__canvas-wrap chart-container chart-container--empty" id="chartDetailBalanceContainer">
+          <canvas id="chartDetailBalanceCanvas"></canvas>
+          <p class="chart-placeholder">Недостаточно данных</p>
+        </div>
+        <div class="chart-detail__insight">
+          <div class="chart-detail__insight-title" id="chartDetailBalanceInsightTitle">Пользуйтесь картой активнее</div>
+          <span class="chart-detail__insight-pill" id="chartDetailBalanceInsightPill">Мало данных</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Модалка: подробный график доходов/расходов ("Остаток от дохода") -->
+    <div class="modal modal--chart-detail" id="modalCashflowDetail" hidden>
+      <div class="modal__header">
+        <button class="modal__close-text" data-close-modal>Закрыть</button>
+        <h3 class="modal__title">Остаток от дохода</h3>
+        <span style="width:56px"></span>
+      </div>
+      <div class="modal__body">
+        <div class="chart-detail__value" id="chartDetailCashflowValue">0,00 ₽</div>
+        <div class="chart-detail__stats">
+          <div class="chart-detail__stat">
+            <div class="chart-detail__stat-label">Траты</div>
+            <div class="chart-detail__stat-value chart-detail__stat-value--expense" id="chartDetailExpenseValue">0,00 ₽</div>
+          </div>
+          <div class="chart-detail__stat">
+            <div class="chart-detail__stat-label">Доходы</div>
+            <div class="chart-detail__stat-value chart-detail__stat-value--income" id="chartDetailIncomeValue">0,00 ₽</div>
+          </div>
+        </div>
+        <div class="chart-detail__canvas-wrap chart-container chart-container--empty" id="chartDetailCashflowContainer">
+          <canvas id="chartDetailCashflowCanvas"></canvas>
+          <p class="chart-placeholder">Недостаточно данных</p>
+        </div>
+        <div class="chart-detail__insight">
+          <div class="chart-detail__insight-title" id="chartDetailCashflowInsightTitle">Мало данных, чтобы дать рекомендацию</div>
+          <span class="chart-detail__insight-pill" id="chartDetailCashflowInsightPill">Мало данных</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ===================== УВЕДОМЛЕНИЯ / TOASTS ===================== -->
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+  <!-- ===================== JS-МОДУЛИ ===================== -->
+  <script src="app.js?v=1"></script>
+
+</body>
+</html>
